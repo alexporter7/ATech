@@ -1,10 +1,10 @@
 package com.alexp777.atech.item;
 
 import com.alexp777.atech.ATech;
+import com.alexp777.atech.item.custom.CustomIngot;
 import com.alexp777.atech.item.custom.FlyWheelItem;
 import com.alexp777.atech.util.Material;
 import com.alexp777.atech.util.ModValue;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,6 +21,10 @@ public class ModItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ATech.MODID);
 
 	//Items
+	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", CustomIngot::new);
+	//public static final RegistryObject<Item> TUNGSTEN_STEEL_INGOT = ITEMS.register("tungsten_steel_ingot", CustomIngot::new);
+	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", CustomIngot::new);
+	public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot", CustomIngot::new);
 
 	//Flywheels
 	public static final RegistryObject<Item> IRON_FLY_WHEEL =

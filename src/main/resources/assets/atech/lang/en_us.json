@@ -3,5 +3,9 @@
   "item.atech.steel_fly_wheel": "Steel Fly Wheel",
   "item.atech.tungsten_steel_fly_wheel": "Tungsten Steel Fly Wheel",
 
+  "item.atech.steel_ingot": "Steel Ingot",
+  "item.atech.copper_ingot": "Copper Ingot",
+  "item.atech.tin_ingot": "Tin Ingot",
+
   "itemGroup.atech_tab": "ATech"
 }

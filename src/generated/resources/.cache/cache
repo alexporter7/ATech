@@ -1,2 +1,8 @@
+095c156674e9babe28f9b5f98a175e312afd4e85 assets/atech/models/item/copper_ingot.json
+ecc1b3acddbfd0701720e927540fc7265cff5a0c assets/atech/models/item/iron_fly_wheel.json
+59d75f7d21705ee47439940601e8165a1623206c assets/atech/models/item/steel_fly_wheel.json
+ee961b5f8ef080367f4955ba9d7be3a0b4e1efca assets/atech/models/item/steel_ingot.json
+df38d01a677e9439436fde9cd2c8a3c0e3f2675a assets/atech/models/item/tin_ingot.json
+34b761d4e19eac3f037af370e540409bb1e710b1 assets/atech/models/item/tungsten_steel_fly_wheel.json
 645fe444c68536bc61685cde2f3a958305e1dd10 data/atech/advancements/recipes/atech_tab/iron_fly_wheel.json
 8dafced55210f7e24c296ac9633c1daf5b6a982c data/atech/recipes/iron_fly_wheel.json
