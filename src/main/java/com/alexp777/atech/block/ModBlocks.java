@@ -1,13 +1,14 @@
 package com.alexp777.atech.block;
 
 import com.alexp777.atech.ATech;
-import com.alexp777.atech.block.worktables.ProjectTable;
+import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
 import com.alexp777.atech.item.ModCreativeModeTab;
 import com.alexp777.atech.item.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,7 +26,10 @@ public class ModBlocks {
 
 	//Blocks
 	public static final RegistryObject<Block> PROJECT_TABLE =
-			registerBlock("project_table", ProjectTable::new, ModCreativeModeTab.ATECH_TAB);
+			registerBlock("project_table",
+					() -> new ProjectTable(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
+					ModCreativeModeTab.ATECH_TAB);
+
 
 	/**
 	 * Register a block

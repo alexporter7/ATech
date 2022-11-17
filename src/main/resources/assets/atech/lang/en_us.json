@@ -7,5 +7,11 @@
   "item.atech.copper_ingot": "Copper Ingot",
   "item.atech.tin_ingot": "Tin Ingot",
 
+  "item.atech.connecting_rod": "Connecting Rod",
+  "item.atech.piston": "Piston",
+  "item.atech.engine_block": "Engine Block",
+
+  "block.atech.project_table": "Project Table",
+
   "itemGroup.atech_tab": "ATech"
 }

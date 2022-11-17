@@ -57,4 +57,26 @@ public class ModValue {
 	public static final String GEAR_DURABILITY_TAG = "atech.fly_wheel_durability";
 	public static final String GEAR_MODIFIER_TAG = "atech.fly_wheel_modifier";
 
+	//Connecting Rods
+	public static final String CONNECTING_ROD_TEMPERATURE_TAG = "atech.connecting_rod_temperature";
+	public static final String CONNECTING_ROD_DURABILITY_TAG = "atech.connecting_rod_durability";
+	public static final String CONNECTING_ROD_MODIFIER_TAG = "atech.connecting_rod_modifier";
+
+	//Project Table
+	public static final int PROJECT_TABLE_SLOTS = 11;
+	public static final String PROJECT_TABLE_INVENTORY_KEY = "inventory";
+
+	public static final int PISTON_SLOT_1 = 0;
+	public static final int PISTON_SLOT_2 = 1;
+	public static final int PISTON_SLOT_3 = 2;
+	public static final int PISTON_SLOT_4 = 3;
+
+	public static final int CONNECTING_ROD_SLOT_1 = 4;
+	public static final int CONNECTING_ROD_SLOT_2 = 5;
+	public static final int CONNECTING_ROD_SLOT_3 = 6;
+	public static final int CONNECTING_ROD_SLOT_4 = 7;
+
+	public static final int ENGINE_BLOCK_SLOT = 8;
+	public static final int HAMMER_SLOT = 9;
+	public static final int OUTPUT_SLOT = 10;
 }

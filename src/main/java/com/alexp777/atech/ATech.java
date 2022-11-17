@@ -1,7 +1,9 @@
 package com.alexp777.atech;
 
+import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
+import com.alexp777.atech.screen.ModMenuTypes;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,15 +32,21 @@ public class ATech
 
     public ATech() {
 
+        // Get ModEventBus
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        // Register all items, blocks, entities, etc
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
 
+        //Add listeners
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
 
+        //Register
         MinecraftForge.EVENT_BUS.register(this);
     }
 
