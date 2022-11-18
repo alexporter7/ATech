@@ -4,7 +4,9 @@ import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
 import com.alexp777.atech.screen.ModMenuTypes;
+import com.alexp777.atech.screen.ProjectTableScreen;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -13,6 +15,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -43,6 +46,7 @@ public class ATech
 
         //Add listeners
         modEventBus.addListener(this::setup);
+        modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
 
@@ -89,5 +93,9 @@ public class ATech
             // Register a new block here
             LOGGER.info("HELLO from Register Block");
         }
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event) {
+        MenuScreens.register(ModMenuTypes.PROJECT_TABLE_MENU.get(), ProjectTableScreen::new);
     }
 }

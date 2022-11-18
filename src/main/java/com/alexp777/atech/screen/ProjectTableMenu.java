@@ -37,17 +37,17 @@ public class ProjectTableMenu extends AbstractContainerMenu {
 		//Add in TileEntity/Block Entity Slots
 		this.projectTableBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 				.ifPresent(handler -> {
-					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_1, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_2, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_3, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_4, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_1, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_2, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_3, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_4, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.ENGINE_BLOCK_SLOT, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.HAMMER_SLOT, 0, 0));
-					this.addSlot(new SlotItemHandler(handler, ModValue.OUTPUT_SLOT, 0, 0));
+					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_1, 51, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_2, 69, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_3, 87, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.PISTON_SLOT_4, 105, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_1, 51, 39));
+					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_2, 69, 39));
+					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_3, 87, 39));
+					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_4, 105, 39));
+					this.addSlot(new SlotItemHandler(handler, ModValue.ENGINE_BLOCK_SLOT, 21, 39));
+					this.addSlot(new SlotItemHandler(handler, ModValue.HAMMER_SLOT, 21, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.OUTPUT_SLOT, 131, 21));
 		});
 	}
 
