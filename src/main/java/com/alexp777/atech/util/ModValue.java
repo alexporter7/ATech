@@ -68,6 +68,13 @@ public class ModValue {
 	public static final String PISTON_DURABILITY_TAG = "atech.piston_durability"; //probably should use built in durability
 	public static final String PISTON_MODIFIER_TAG = "atech.piston_modifier";
 
+	//Steel Forge
+	public static final int STEEL_FORGE_SLOTS = 3;
+
+	public static final int STEEL_FORGE_IRON_SLOT = 0;
+	public static final int STEEL_FORGE_CARBON_SLOT = 1;
+	public static final int STEEL_FORGE_OUTPUT_SLOT = 2;
+
 	//Project Table
 	public static final int PROJECT_TABLE_SLOTS = 11;
 	public static final String PROJECT_TABLE_INVENTORY_KEY = "inventory";

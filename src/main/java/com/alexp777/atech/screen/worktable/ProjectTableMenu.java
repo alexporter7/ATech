@@ -1,7 +1,9 @@
-package com.alexp777.atech.screen;
+package com.alexp777.atech.screen.worktable;
 
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
+import com.alexp777.atech.screen.ATechMenu;
+import com.alexp777.atech.screen.ModMenuTypes;
 import com.alexp777.atech.screen.slot.ModResultSlot;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ProjectTableMenu extends AbstractContainerMenu {
+public class ProjectTableMenu extends ATechMenu {
 
 	private final ProjectTableBlockEntity projectTableBlockEntity;
 	private final Level level;
@@ -106,14 +108,14 @@ public class ProjectTableMenu extends AbstractContainerMenu {
 				pPlayer, ModBlocks.PROJECT_TABLE.get());
 	}
 
-	private void addPlayerInventory(Inventory playerInventory) {
-		for(int i = 0; i < 3; ++i)
-			for(int l = 0; l < 9; ++l)
-				this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
-	}
-
-	private void addPlayerHotbar(Inventory playerInventory) {
-		for (int i = 0; i < 9; ++i)
-			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
-	}
+//	private void addPlayerInventory(Inventory playerInventory) {
+//		for(int i = 0; i < 3; ++i)
+//			for(int l = 0; l < 9; ++l)
+//				this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, 86 + i * 18));
+//	}
+//
+//	private void addPlayerHotbar(Inventory playerInventory) {
+//		for (int i = 0; i < 9; ++i)
+//			this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 144));
+//	}
 }

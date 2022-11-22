@@ -12,9 +12,13 @@ public class ATechBaseEntityBlock extends BaseEntityBlock {
 		super(pProperties);
 	}
 
+
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
 		return null;
 	}
+
+
+
 }

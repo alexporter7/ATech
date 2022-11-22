@@ -1,7 +1,7 @@
 package com.alexp777.atech.block.worktables;
 
 import com.alexp777.atech.block.ModBlockEntities;
-import com.alexp777.atech.screen.ProjectTableMenu;
+import com.alexp777.atech.screen.worktable.ProjectTableMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

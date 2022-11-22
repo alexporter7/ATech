@@ -1,4 +1,4 @@
-package com.alexp777.atech.screen;
+package com.alexp777.atech.screen.worktable;
 
 import com.alexp777.atech.ATech;
 import com.mojang.blaze3d.systems.RenderSystem;

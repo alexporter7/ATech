@@ -4,7 +4,7 @@ import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
 import com.alexp777.atech.screen.ModMenuTypes;
-import com.alexp777.atech.screen.ProjectTableScreen;
+import com.alexp777.atech.screen.worktable.ProjectTableScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.level.block.Block;

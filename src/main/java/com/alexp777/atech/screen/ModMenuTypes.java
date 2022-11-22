@@ -1,6 +1,7 @@
 package com.alexp777.atech.screen;
 
 import com.alexp777.atech.ATech;
+import com.alexp777.atech.screen.worktable.ProjectTableMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
