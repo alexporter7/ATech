@@ -4,6 +4,7 @@ import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
 import com.alexp777.atech.screen.ModMenuTypes;
+import com.alexp777.atech.screen.metalforge.SteelForgeScreen;
 import com.alexp777.atech.screen.worktable.ProjectTableScreen;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -97,5 +98,6 @@ public class ATech
 
     private void clientSetup(final FMLClientSetupEvent event) {
         MenuScreens.register(ModMenuTypes.PROJECT_TABLE_MENU.get(), ProjectTableScreen::new);
+        MenuScreens.register(ModMenuTypes.STEEL_FORGE_MENU.get(), SteelForgeScreen::new);
     }
 }

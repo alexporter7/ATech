@@ -1,6 +1,7 @@
 package com.alexp777.atech.screen;
 
 import com.alexp777.atech.ATech;
+import com.alexp777.atech.screen.metalforge.SteelForgeMenu;
 import com.alexp777.atech.screen.worktable.ProjectTableMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +19,8 @@ public class ModMenuTypes {
 
 	public static final RegistryObject<MenuType<ProjectTableMenu>> PROJECT_TABLE_MENU =
 			registerMenuType(ProjectTableMenu::new, "project_table_menu");
+	public static final RegistryObject<MenuType<SteelForgeMenu>> STEEL_FORGE_MENU =
+			registerMenuType(SteelForgeMenu::new, "steel_forge_menu");
 
 	private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name) {
 		return MENUS.register(name, () -> IForgeMenuType.create(factory));

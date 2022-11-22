@@ -69,6 +69,7 @@ public class ModValue {
 	public static final String PISTON_MODIFIER_TAG = "atech.piston_modifier";
 
 	//Steel Forge
+	public static final String STEEL_FORGE_INVENTORY_KEY = "inventory";
 	public static final int STEEL_FORGE_SLOTS = 3;
 
 	public static final int STEEL_FORGE_IRON_SLOT = 0;

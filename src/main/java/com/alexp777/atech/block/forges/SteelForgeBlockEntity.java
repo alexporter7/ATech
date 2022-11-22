@@ -2,6 +2,8 @@ package com.alexp777.atech.block.forges;
 
 import com.alexp777.atech.block.ATechBlockEntity;
 import com.alexp777.atech.block.ModBlockEntities;
+import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
+import com.alexp777.atech.screen.metalforge.SteelForgeMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -10,7 +12,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,6 +30,13 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
-		return null;
+		return new SteelForgeMenu(pContainerId, pPlayerInventory, this);
 	}
+
+	public static void tick(Level pLevel, BlockPos pPos, BlockState pState,
+							SteelForgeBlockEntity pEntity) {
+
+	}
+
+
 }

@@ -3,6 +3,9 @@ package com.alexp777.atech.block;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.Containers;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,4 +38,41 @@ public class ATechBlockEntity extends BlockEntity {
 				? itemHandlerLazyOptional.cast()
 				: super.getCapability(cap, side);
 	}
+
+	public void drops() {
+		SimpleContainer inventory = new SimpleContainer(itemStackHandler.getSlots());
+		for(int i = 0; i < itemStackHandler.getSlots(); i++)
+			inventory.setItem(i, itemStackHandler.getStackInSlot(i));
+
+		assert this.level != null;
+		Containers.dropContents(this.level, this.worldPosition, inventory);
+	}
+
+	@Override
+	public void onLoad() {
+		super.onLoad();
+		itemHandlerLazyOptional = LazyOptional.of(() -> itemStackHandler);
+	}
+
+	@Override
+	protected void saveAdditional(CompoundTag pTag) {
+		pTag.put(ModValue.STEEL_FORGE_INVENTORY_KEY, itemStackHandler.serializeNBT());
+		super.saveAdditional(pTag);
+	}
+
+	@Override
+	public void load(CompoundTag pTag) {
+		super.load(pTag);
+		itemStackHandler.deserializeNBT(pTag.getCompound(ModValue.STEEL_FORGE_INVENTORY_KEY));
+	}
+
+	@Override
+	public void invalidateCaps() {
+		super.invalidateCaps();
+		itemHandlerLazyOptional.invalidate();
+	}
+
+
+
+
 }

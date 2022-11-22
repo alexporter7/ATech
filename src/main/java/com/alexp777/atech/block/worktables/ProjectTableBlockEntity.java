@@ -80,7 +80,7 @@ public class ProjectTableBlockEntity extends BlockEntity implements MenuProvider
 	@Override
 	public void load(CompoundTag pTag) {
 		super.load(pTag);
-		itemStackHandler.deserializeNBT(serializeNBT().getCompound(ModValue.PROJECT_TABLE_INVENTORY_KEY));
+		itemStackHandler.deserializeNBT(pTag.getCompound(ModValue.PROJECT_TABLE_INVENTORY_KEY));
 	}
 
 	public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ProjectTableBlockEntity pEntity) {
