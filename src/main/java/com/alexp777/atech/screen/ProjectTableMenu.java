@@ -2,6 +2,7 @@ package com.alexp777.atech.screen;
 
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
+import com.alexp777.atech.screen.slot.ModResultSlot;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -47,7 +48,7 @@ public class ProjectTableMenu extends AbstractContainerMenu {
 					this.addSlot(new SlotItemHandler(handler, ModValue.CONNECTING_ROD_SLOT_4, 105, 39));
 					this.addSlot(new SlotItemHandler(handler, ModValue.ENGINE_BLOCK_SLOT, 21, 39));
 					this.addSlot(new SlotItemHandler(handler, ModValue.HAMMER_SLOT, 21, 21));
-					this.addSlot(new SlotItemHandler(handler, ModValue.OUTPUT_SLOT, 131, 21));
+					this.addSlot(new ModResultSlot(handler, ModValue.OUTPUT_SLOT, 131, 21));
 		});
 	}
 

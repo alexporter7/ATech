@@ -1,5 +1,6 @@
-package com.alexp777.atech.block;
+package com.alexp777.atech.block.blocks;
 
+import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 public class ProjectTable extends BaseEntityBlock {
 
 
-	protected ProjectTable(Properties pProperties) {
+	public ProjectTable(Properties pProperties) {
 		super(pProperties);
 	}
 

@@ -1,7 +1,8 @@
 package com.alexp777.atech.block;
 
 import com.alexp777.atech.ATech;
-import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
+import com.alexp777.atech.block.blocks.ProjectTable;
+import com.alexp777.atech.block.blocks.SteelForge;
 import com.alexp777.atech.item.ModCreativeModeTab;
 import com.alexp777.atech.item.ModItems;
 import net.minecraft.world.item.BlockItem;
@@ -28,6 +29,10 @@ public class ModBlocks {
 	public static final RegistryObject<Block> PROJECT_TABLE =
 			registerBlock("project_table",
 					() -> new ProjectTable(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
+					ModCreativeModeTab.ATECH_TAB);
+	public static final RegistryObject<Block> STEEL_FORGE =
+			registerBlock("steel_forge",
+					() -> new SteelForge(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
 					ModCreativeModeTab.ATECH_TAB);
 
 

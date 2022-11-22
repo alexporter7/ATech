@@ -58,9 +58,15 @@ public class ModValue {
 	public static final String GEAR_MODIFIER_TAG = "atech.fly_wheel_modifier";
 
 	//Connecting Rods
-	public static final String CONNECTING_ROD_TEMPERATURE_TAG = "atech.connecting_rod_temperature";
+	public static final String CONNECTING_ROD_STRENGTH_TAG = "atech.connecting_rod_strength";
 	public static final String CONNECTING_ROD_DURABILITY_TAG = "atech.connecting_rod_durability";
 	public static final String CONNECTING_ROD_MODIFIER_TAG = "atech.connecting_rod_modifier";
+	public static final String CONNECTING_ROD_MAX_RPM = "atech.connecting_rod_max_rpm";
+
+	//Pistons
+	public static final String PISTON_MAX_POWER_FACTOR_TAG = "atech.piston_max_power_factor";
+	public static final String PISTON_DURABILITY_TAG = "atech.piston_durability"; //probably should use built in durability
+	public static final String PISTON_MODIFIER_TAG = "atech.piston_modifier";
 
 	//Project Table
 	public static final int PROJECT_TABLE_SLOTS = 11;
