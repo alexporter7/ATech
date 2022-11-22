@@ -2,6 +2,7 @@ package com.alexp777.atech.block.blocks;
 
 import com.alexp777.atech.block.forges.SteelForgeBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -14,6 +15,10 @@ public class SteelForge extends ATechBaseEntityBlock{
 
 	//return new ProjectTableBlockEntity(pPos, pState);
 
+	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
 
 	@Override
 	public @Nullable BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {

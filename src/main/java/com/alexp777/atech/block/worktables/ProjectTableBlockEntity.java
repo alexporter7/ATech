@@ -114,6 +114,7 @@ public class ProjectTableBlockEntity extends BlockEntity implements MenuProvider
 		for(int i = 0; i < itemStackHandler.getSlots(); i++)
 			inventory.setItem(i, itemStackHandler.getStackInSlot(i));
 
+		assert this.level != null;
 		Containers.dropContents(this.level, this.worldPosition, inventory);
 	}
 }
