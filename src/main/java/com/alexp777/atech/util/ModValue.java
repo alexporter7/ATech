@@ -68,8 +68,12 @@ public class ModValue {
 	public static final String PISTON_DURABILITY_TAG = "atech.piston_durability"; //probably should use built in durability
 	public static final String PISTON_MODIFIER_TAG = "atech.piston_modifier";
 
+	//Block Entities
+	public static final String BLOCK_ENTITY_INVENTORY_KEY = "inventory";
+
 	//Steel Forge
-	public static final String STEEL_FORGE_INVENTORY_KEY = "inventory";
+	public static final String STEEL_FORGE_TEMPERATURE_TAG = "atech.forge_temperature";
+	public static final int STEEL_FORGE_MAX_TEMP = 5000;
 	public static final int STEEL_FORGE_SLOTS = 3;
 
 	public static final int STEEL_FORGE_IRON_SLOT = 0;

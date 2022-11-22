@@ -31,6 +31,10 @@ public class ATechBlockEntity extends BlockEntity {
 		};
 	}
 
+	public ItemStackHandler getItemStackHandler() {
+		return this.itemStackHandler;
+	}
+
 	@NotNull
 	@Override
 	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -56,14 +60,14 @@ public class ATechBlockEntity extends BlockEntity {
 
 	@Override
 	protected void saveAdditional(CompoundTag pTag) {
-		pTag.put(ModValue.STEEL_FORGE_INVENTORY_KEY, itemStackHandler.serializeNBT());
+		pTag.put(ModValue.BLOCK_ENTITY_INVENTORY_KEY, itemStackHandler.serializeNBT());
 		super.saveAdditional(pTag);
 	}
 
 	@Override
 	public void load(CompoundTag pTag) {
 		super.load(pTag);
-		itemStackHandler.deserializeNBT(pTag.getCompound(ModValue.STEEL_FORGE_INVENTORY_KEY));
+		itemStackHandler.deserializeNBT(pTag.getCompound(ModValue.BLOCK_ENTITY_INVENTORY_KEY));
 	}
 
 	@Override
