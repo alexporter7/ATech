@@ -73,7 +73,11 @@ public class ModValue {
 
 	//Steel Forge
 	public static final String STEEL_FORGE_TEMPERATURE_TAG = "atech.forge_temperature";
-	public static final int STEEL_FORGE_MAX_TEMP = 5000;
+	public static final int STEEL_FORGE_MAX_TEMP = 200;
+
+	public static final int STEEL_FORGE_CASE_TEMPERATURE = 0;
+	public static final int STEEL_FORGE_CASE_MAX_TEMP = 1;
+	public static final int STEEL_FORGE_CONTAINER_COUNT = 2;
 	public static final int STEEL_FORGE_SLOTS = 3;
 
 	public static final int STEEL_FORGE_IRON_SLOT = 0;

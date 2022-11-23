@@ -18,6 +18,11 @@ public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 	}
 
 	@Override
+	protected void init() {
+		super.init();
+	}
+
+	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
@@ -27,6 +32,14 @@ public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 		int y = (height - imageHeight) / 2;
 
 		this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
+
+		renderLabels(pPoseStack, pMouseX, pMouseY);
+	}
+
+	@Override
+	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
+		super.renderLabels(pPoseStack, pMouseX, pMouseY);
+		this.font.draw(pPoseStack, String.valueOf(menu.getTemperature()), (float)100, (float)20, 4210752);
 	}
 
 	@Override
@@ -34,5 +47,6 @@ public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 		renderBackground(pPoseStack);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
 		renderTooltip(pPoseStack, pMouseX, pMouseY);
+
 	}
 }
