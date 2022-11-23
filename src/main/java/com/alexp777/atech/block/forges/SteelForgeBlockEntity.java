@@ -2,7 +2,6 @@ package com.alexp777.atech.block.forges;
 
 import com.alexp777.atech.block.ATechBlockEntity;
 import com.alexp777.atech.block.ModBlockEntities;
-import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
 import com.alexp777.atech.screen.metalforge.SteelForgeMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
@@ -14,7 +13,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +24,7 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 	private int temperature = 0;
 	private int heatTicks = 0;
 	private int maxTemperature = ModValue.STEEL_FORGE_MAX_TEMP;
+	private int cooldownFactor = 0; //I want some kind of cooldown factor
 
 	protected final ContainerData data;
 	public SteelForgeBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -33,17 +32,24 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		super(ModBlockEntities.STEEL_FORGE_BLOCK_ENTITY.get(), pPos,
 				pBlockState, ModValue.STEEL_FORGE_SLOTS);
 
+		//Initialize the cooldown factor (this won't be here forever but for testing
+		this.cooldownFactor = 10;
+
 		//Initializing ContainerData (the fancy IIntArray)
 		this.data = new ContainerData() {
 			@Override
 			public int get(int pIndex) {
 				switch(pIndex) {
-					case ModValue.STEEL_FORGE_CASE_TEMPERATURE 					//Temperature [0]
+					case ModValue.STEEL_FORGE_CASE_TEMPERATURE_DATA                    	//Temperature [0]
 							: return SteelForgeBlockEntity.this.temperature;
-					case ModValue.STEEL_FORGE_CASE_MAX_TEMP 					//Max Temperature [1]
+					case ModValue.STEEL_FORGE_CASE_MAX_TEMP_DATA                    	//Max Temperature [1]
 							: return SteelForgeBlockEntity.this.maxTemperature;
+					case ModValue.STEEL_FORGE_COOLDOWN_FACTOR_DATA
+							: return SteelForgeBlockEntity.this.cooldownFactor; 		//Cooldown factor [2]
+					case ModValue.STEEL_FORGE_HEAT_TICK_DATA
+							: return SteelForgeBlockEntity.this.heatTicks; 				//Heat Ticks [3]
 					default
-							: return 0; 										//If something else gets thrown in return 0
+							: return 0; 												//If something else gets thrown in return 0
 				}
 			}
 
@@ -51,8 +57,10 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 			public void set(int pIndex, int pValue) {
 				//See this new fancy switch statement it has arrows!
 				switch (pIndex) {
-					case ModValue.STEEL_FORGE_CASE_TEMPERATURE -> SteelForgeBlockEntity.this.temperature = pValue;
-					case ModValue.STEEL_FORGE_CASE_MAX_TEMP -> SteelForgeBlockEntity.this.maxTemperature = pValue;
+					case ModValue.STEEL_FORGE_CASE_TEMPERATURE_DATA -> SteelForgeBlockEntity.this.temperature = pValue;
+					case ModValue.STEEL_FORGE_CASE_MAX_TEMP_DATA -> SteelForgeBlockEntity.this.maxTemperature = pValue;
+					case ModValue.STEEL_FORGE_COOLDOWN_FACTOR_DATA -> SteelForgeBlockEntity.this.cooldownFactor = pValue;
+					case ModValue.STEEL_FORGE_HEAT_TICK_DATA -> SteelForgeBlockEntity.this.heatTicks = pValue;
 				}
 			}
 
@@ -64,6 +72,10 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		};
 	}
 
+	/**
+	 * Display name, gets refreshed on GUI open
+	 * @return TextComponent ie: string
+	 */
 	@Override
 	public @NotNull Component getDisplayName() {
 		return new TextComponent("Basic Steel Forge");
@@ -132,16 +144,14 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 			//put steel in output slot
 	}
 
-	private boolean isAtMaxTemp() {
-		return this.temperature == this.maxTemperature;
-	}
-
 	/*
 	======= NBT Data =======
 	 */
 	@Override
 	protected void saveAdditional(CompoundTag pTag) {
 		pTag.putInt(ModValue.STEEL_FORGE_TEMPERATURE_TAG, getTemperature());
+		pTag.putInt(ModValue.STEEL_FORGE_COOLDOWN_FACTOR, getCooldownFactor());
+		pTag.putInt(ModValue.STEEL_FORGE_HEAT_TICK_TAG, getHeatTicks());
 		//TODO add heat ticks to nbt data
 		super.saveAdditional(pTag);
 	}
@@ -151,6 +161,8 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		super.load(pTag);
 		//TODO add heat ticks to loading nbt data
 		setTemperature(pTag.getInt(ModValue.STEEL_FORGE_TEMPERATURE_TAG));
+		setHeatTicks(pTag.getInt(ModValue.STEEL_FORGE_HEAT_TICK_TAG));
+		setCooldownFactor(pTag.getInt(ModValue.STEEL_FORGE_COOLDOWN_FACTOR));
 	}
 
 	/*
@@ -168,6 +180,14 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		this.heatTicks = Math.max(0, --this.heatTicks);
 	}
 
+	public int getHeatTicks() {
+		return this.heatTicks;
+	}
+
+	public void setHeatTicks(int heatTicks) {
+		this.heatTicks = heatTicks;
+	}
+
 	/*
 	======= Temperature Methods =======
 	 */
@@ -180,8 +200,12 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		setTemperature(++this.temperature);
 	}
 
+	/**
+	 * We're taking the cooldown factor and turning it into a percentage
+	 * Ex: CF(10)/100 = 0.1
+	 */
 	public void decrementTemperature() {
-		if(Math.random() < 0.1)
+		if(Math.random() < ((double)(this.cooldownFactor))/100.0)
 			setTemperature(--this.temperature);
 	}
 
@@ -189,5 +213,20 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		this.temperature = (temperature < 0)
 							? 0
 							: Math.min(temperature, this.maxTemperature);
+	}
+
+	private boolean isAtMaxTemp() {
+		return this.temperature == this.maxTemperature;
+	}
+
+	/*
+	======= Cooldown Factor Methods =======
+	 */
+	public int getCooldownFactor() {
+		return this.cooldownFactor;
+	}
+
+	public void setCooldownFactor(int cooldownFactor) {
+		this.cooldownFactor = cooldownFactor;
 	}
 }

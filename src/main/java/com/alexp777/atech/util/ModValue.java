@@ -73,11 +73,17 @@ public class ModValue {
 
 	//Steel Forge
 	public static final String STEEL_FORGE_TEMPERATURE_TAG = "atech.forge_temperature";
+	public static final String STEEL_FORGE_HEAT_TICK_TAG = "atech.forge_heat_ticks";
+	public static final String STEEL_FORGE_COOLDOWN_FACTOR = "atech.forge_cooldown_factor";
 	public static final int STEEL_FORGE_MAX_TEMP = 200;
 
-	public static final int STEEL_FORGE_CASE_TEMPERATURE = 0;
-	public static final int STEEL_FORGE_CASE_MAX_TEMP = 1;
-	public static final int STEEL_FORGE_CONTAINER_COUNT = 2;
+	public static final int STEEL_FORGE_CASE_TEMPERATURE_DATA = 0;
+	public static final int STEEL_FORGE_CASE_MAX_TEMP_DATA = 1;
+	public static final int STEEL_FORGE_COOLDOWN_FACTOR_DATA = 2;
+	public static final int STEEL_FORGE_HEAT_TICK_DATA = 3;
+	public static final int STEEL_FORGE_CONTAINER_COUNT = 4;
+
+
 	public static final int STEEL_FORGE_SLOTS = 3;
 
 	public static final int STEEL_FORGE_IRON_SLOT = 0;

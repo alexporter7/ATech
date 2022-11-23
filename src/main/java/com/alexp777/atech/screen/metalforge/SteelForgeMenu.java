@@ -54,8 +54,18 @@ public class SteelForgeMenu extends ATechMenu {
 		addDataSlots(this.data);
 	}
 
+	/*
+	======= ContainerData Methods =======
+	 */
 	public int getTemperature() {
-		return this.data.get(ModValue.STEEL_FORGE_CASE_TEMPERATURE);
+		return this.data.get(ModValue.STEEL_FORGE_CASE_TEMPERATURE_DATA);
+	}
+	public int getHeatTicks() {
+		return this.data.get(ModValue.STEEL_FORGE_HEAT_TICK_DATA);
+	}
+
+	public int getCooldownFactor() {
+		return this.data.get(ModValue.STEEL_FORGE_COOLDOWN_FACTOR_DATA);
 	}
 
 	@Override
@@ -64,6 +74,9 @@ public class SteelForgeMenu extends ATechMenu {
 				pPlayer, ModBlocks.STEEL_FORGE.get());
 	}
 
+	/*
+	======= Shift Clicking Mess =======
+	 */
 	private static final int HOTBAR_SLOT_COUNT = 9;
 	private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
 	private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
