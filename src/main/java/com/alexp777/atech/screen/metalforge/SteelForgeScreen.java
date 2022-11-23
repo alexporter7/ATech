@@ -11,10 +11,16 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 
+	private final float DEG_LABEL_X = 114;
+	private final float DEG_LABEL_Y = 16;
+	private final float PROG_LABEL_X = 114;
+	private final float PROG_LABEL_Y = 25;
+	private final int COLOR = -12829636;
 	private static final ResourceLocation TEXTURE =
 			new ResourceLocation(ATech.MODID, "textures/gui/steel_forge.png");
 	public SteelForgeScreen(SteelForgeMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, pTitle);
+
 	}
 
 	@Override
@@ -33,13 +39,18 @@ public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 
 		this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
 
+
 		renderLabels(pPoseStack, pMouseX, pMouseY);
 	}
 
 	@Override
 	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
 		super.renderLabels(pPoseStack, pMouseX, pMouseY);
-		this.font.draw(pPoseStack, String.valueOf(menu.getTemperature()), (float)100, (float)20, 4210752);
+		//this.font.draw(pPoseStack, String.valueOf(menu.getTemperature()), (float)100, (float)20, 4210752);
+		this.font.draw(pPoseStack, menu.getTemperature() + " \u00B0C",
+				DEG_LABEL_X, DEG_LABEL_Y, COLOR);
+		this.font.draw(pPoseStack, "0 %",
+				PROG_LABEL_X, PROG_LABEL_Y, COLOR);
 	}
 
 	@Override

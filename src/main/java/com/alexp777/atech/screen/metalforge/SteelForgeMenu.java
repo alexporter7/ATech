@@ -46,9 +46,9 @@ public class SteelForgeMenu extends ATechMenu {
 		//Add in TileEntity/Block Entity Slots
 		this.steelForgeBlockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 				.ifPresent(handler -> {
-					this.addSlot(new SlotItemHandler(handler, ModValue.STEEL_FORGE_IRON_SLOT, 51, 21));
-					this.addSlot(new SlotItemHandler(handler, ModValue.STEEL_FORGE_CARBON_SLOT, 69, 21));
-					this.addSlot(new ModResultSlot(handler, ModValue.STEEL_FORGE_OUTPUT_SLOT, 131, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.STEEL_FORGE_IRON_SLOT, 21, 21));
+					this.addSlot(new SlotItemHandler(handler, ModValue.STEEL_FORGE_CARBON_SLOT, 21, 39));
+					this.addSlot(new ModResultSlot(handler, ModValue.STEEL_FORGE_OUTPUT_SLOT, 48, 30));
 				});
 
 		addDataSlots(this.data);
