@@ -3,6 +3,7 @@ package com.alexp777.atech;
 import com.alexp777.atech.block.ModBlockEntities;
 import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
+import com.alexp777.atech.recipe.ModRecipes;
 import com.alexp777.atech.screen.ModMenuTypes;
 import com.alexp777.atech.screen.metalforge.SteelForgeScreen;
 import com.alexp777.atech.screen.worktable.ProjectTableScreen;
@@ -44,6 +45,7 @@ public class ATech
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         //Add listeners
         modEventBus.addListener(this::setup);

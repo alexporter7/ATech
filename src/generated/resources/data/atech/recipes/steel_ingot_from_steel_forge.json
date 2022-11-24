@@ -1,0 +1,11 @@
+{
+  "type": "atech:steel_forging",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "atech:steel_ingot"
+  }
+}

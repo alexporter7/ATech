@@ -31,7 +31,7 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 	 * Passing in information to be compiled into JSON
 	 * @param ingredient Ingredient is what goes into the recipe
 	 * @param result This is what... yknow, results from it
-	 * @param count either the amount in or out idk
+	 * @param count count of result
 	 */
 	public SteelForgeRecipeBuilder(ItemLike ingredient, ItemLike result, int count) {
 		this.result = result.asItem();
@@ -52,10 +52,14 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId))
 				.rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
 		//This is actually getting the finished recipe from the Result class implemented below
-		pFinishedRecipeConsumer.accept(new SteelForgeRecipeBuilder
-				.Result(pRecipeId, this.result, this.count, this.ingredient, this.advancement,
-						new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
-						+ this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+		try {
+			pFinishedRecipeConsumer.accept(new SteelForgeRecipeBuilder
+					.Result(pRecipeId, this.result, this.count, this.ingredient, this.advancement,
+					new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
+							+ this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
