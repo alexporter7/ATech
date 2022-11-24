@@ -1,7 +1,9 @@
 package com.alexp777.atech.block.forges;
 
+import com.alexp777.atech.ATech;
 import com.alexp777.atech.block.ATechBlockEntity;
 import com.alexp777.atech.block.ModBlockEntities;
+import com.alexp777.atech.recipe.SteelForgeRecipe;
 import com.alexp777.atech.screen.metalforge.SteelForgeMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
@@ -9,15 +11,19 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvider {
 
@@ -25,6 +31,8 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 	private int heatTicks = 0;
 	private int maxTemperature = ModValue.STEEL_FORGE_MAX_TEMP;
 	private int cooldownFactor = 0; //I want some kind of cooldown factor
+	private int progress = 0;
+	private int maxProgress = 0;
 
 	protected final ContainerData data;
 	public SteelForgeBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -48,6 +56,10 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 							: return SteelForgeBlockEntity.this.cooldownFactor; 		//Cooldown factor [2]
 					case ModValue.STEEL_FORGE_HEAT_TICK_DATA
 							: return SteelForgeBlockEntity.this.heatTicks; 				//Heat Ticks [3]
+					case ModValue.STEEL_FORGE_PROGRESS_DATA
+							: return SteelForgeBlockEntity.this.progress; 				//Progress [4]
+					case ModValue.STEEL_FORGE_MAX_PROGRESS_DATA
+							: return SteelForgeBlockEntity.this.maxProgress; 			//Max Progress [5]
 					default
 							: return 0; 												//If something else gets thrown in return 0
 				}
@@ -61,6 +73,8 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 					case ModValue.STEEL_FORGE_CASE_MAX_TEMP_DATA -> SteelForgeBlockEntity.this.maxTemperature = pValue;
 					case ModValue.STEEL_FORGE_COOLDOWN_FACTOR_DATA -> SteelForgeBlockEntity.this.cooldownFactor = pValue;
 					case ModValue.STEEL_FORGE_HEAT_TICK_DATA -> SteelForgeBlockEntity.this.heatTicks = pValue;
+					case ModValue.STEEL_FORGE_PROGRESS_DATA -> SteelForgeBlockEntity.this.progress = pValue;
+					case ModValue.STEEL_FORGE_MAX_PROGRESS_DATA -> SteelForgeBlockEntity.this.maxProgress = pValue;
 				}
 			}
 
@@ -108,6 +122,11 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		if(!pLevel.isClientSide()
 		&& pEntity != null) {
 
+			if(hasRecipe(pEntity))
+				pEntity.setMaxProgress(getRecipeMaxProgress(pEntity));
+
+			ATech.LOGGER.info(String.valueOf(hasRecipe(pEntity)));
+
 			//This one's a lot, so I want to make sure that
 			//The temperature is LESS THAN 1250, it's NOT heating up, the Carbon Slot is NOT empty
 			//And the Carbon slot HAS coal in it
@@ -145,6 +164,57 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 	}
 
 	/*
+	======= Recipe Methods =======
+	 */
+
+	/**
+	 * Checking to see if there's a valid recipe in there
+	 * I'm immediately returning if there's nothing in the slot since
+	 * why waste time
+	 * @param entity The TileEntity since this is a static method
+	 */
+	public static boolean hasRecipe(SteelForgeBlockEntity entity) {
+
+		Level level = entity.level;
+		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
+		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
+			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
+
+		assert level != null;
+		Optional<SteelForgeRecipe> match = level.getRecipeManager()
+				.getRecipeFor(SteelForgeRecipe.Type.INSTANCE, inventory, level);
+
+		return match.isPresent();
+//		return match.isPresent()
+//				&& canInsertInOutputSlot(inventory, match.get().getResultItem())
+//				&& canInsertAmountIntoOutputSlot(inventory);
+
+	}
+
+	public static int getRecipeMaxProgress(SteelForgeBlockEntity entity) {
+
+		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
+		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
+			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
+
+		assert entity.level != null;
+		Optional<SteelForgeRecipe> match = entity.level.getRecipeManager()
+				.getRecipeFor(SteelForgeRecipe.Type.INSTANCE, inventory, entity.level);
+
+		return match.get().getProgressTicks();
+	}
+
+	private static boolean canInsertInOutputSlot(SimpleContainer inventory, ItemStack output) {
+		return inventory.getItem(ModValue.STEEL_FORGE_OUTPUT_SLOT).isEmpty()
+				|| inventory.getItem(ModValue.STEEL_FORGE_OUTPUT_SLOT).getItem() == output.getItem();
+	}
+
+	private static boolean canInsertAmountIntoOutputSlot(SimpleContainer inventory) {
+		return inventory.getItem(ModValue.STEEL_FORGE_OUTPUT_SLOT).getMaxStackSize()
+				> inventory.getItem(ModValue.STEEL_FORGE_OUTPUT_SLOT).getCount();
+	}
+
+	/*
 	======= NBT Data =======
 	 */
 	@Override
@@ -152,17 +222,20 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		pTag.putInt(ModValue.STEEL_FORGE_TEMPERATURE_TAG, getTemperature());
 		pTag.putInt(ModValue.STEEL_FORGE_COOLDOWN_FACTOR, getCooldownFactor());
 		pTag.putInt(ModValue.STEEL_FORGE_HEAT_TICK_TAG, getHeatTicks());
-		//TODO add heat ticks to nbt data
+		pTag.putInt(ModValue.STEEL_FORGE_PROGRESS_TAG, getProgress());
+		pTag.putInt(ModValue.STEEL_FORGE_MAX_PROGRESS_TAG, getMaxProgress());
 		super.saveAdditional(pTag);
 	}
 
 	@Override
 	public void load(CompoundTag pTag) {
 		super.load(pTag);
-		//TODO add heat ticks to loading nbt data
 		setTemperature(pTag.getInt(ModValue.STEEL_FORGE_TEMPERATURE_TAG));
 		setHeatTicks(pTag.getInt(ModValue.STEEL_FORGE_HEAT_TICK_TAG));
 		setCooldownFactor(pTag.getInt(ModValue.STEEL_FORGE_COOLDOWN_FACTOR));
+		setProgress(pTag.getInt(ModValue.STEEL_FORGE_PROGRESS_TAG));
+		setMaxProgress(pTag.getInt(ModValue.STEEL_FORGE_MAX_PROGRESS_TAG));
+
 	}
 
 	/*
@@ -228,5 +301,27 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 
 	public void setCooldownFactor(int cooldownFactor) {
 		this.cooldownFactor = cooldownFactor;
+	}
+
+	/*
+	======= Progress Methods =======
+	 */
+
+	public int getProgress() {
+		return this.progress;
+	}
+
+	public void setProgress(int progress) {
+		this.progress = (progress > 0)
+				? Math.min(this.maxProgress, progress)
+				: 0;
+	}
+
+	public int getMaxProgress() {
+		return this.maxProgress;
+	}
+
+	public void setMaxProgress(int maxProgress) {
+		this.maxProgress = maxProgress;
 	}
 }

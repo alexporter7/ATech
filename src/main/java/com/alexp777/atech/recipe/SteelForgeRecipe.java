@@ -20,16 +20,22 @@ public class SteelForgeRecipe implements Recipe<SimpleContainer> {
 	private final ResourceLocation id;
 	private final ItemStack output;
 	private final NonNullList<Ingredient> recipeItems;
+	private final int progressTicks;
 
-	public SteelForgeRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems) {
+	public SteelForgeRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> recipeItems, int progressTicks) {
 		this.id = id;
 		this.output = output;
 		this.recipeItems = recipeItems;
+		this.progressTicks = progressTicks;
 	}
 
 	@Override
 	public boolean matches(SimpleContainer pContainer, Level pLevel) {
 		return recipeItems.get(0).test(pContainer.getItem(ModValue.STEEL_FORGE_IRON_SLOT));
+	}
+
+	public int getProgressTicks() {
+		return this.progressTicks;
 	}
 
 	@Override
@@ -102,12 +108,14 @@ public class SteelForgeRecipe implements Recipe<SimpleContainer> {
 			JsonArray ingredients = GsonHelper.getAsJsonArray(json, "ingredients");
 			NonNullList<Ingredient> inputs = NonNullList.withSize(1, Ingredient.EMPTY);
 
+			int progressTicks = GsonHelper.getAsInt(json, "progressTicks");
+
 			//Iterate through JSON Array and push items into the NonNullList
 			for(int i = 0; i < inputs.size(); i++)
 				inputs.set(i, Ingredient.fromJson(ingredients.get(i)));
 
 			//Return a new Recipe with the associated output and inputs;
-			return new SteelForgeRecipe(id, output, inputs);
+			return new SteelForgeRecipe(id, output, inputs, progressTicks);
 
 		}
 
@@ -123,8 +131,9 @@ public class SteelForgeRecipe implements Recipe<SimpleContainer> {
 				inputs.set(i, Ingredient.fromNetwork(pBuffer));
 
 			ItemStack output = pBuffer.readItem();
+			int progressTicks = pBuffer.readInt();
 
-			return new SteelForgeRecipe(pRecipeId, output, inputs);
+			return new SteelForgeRecipe(pRecipeId, output, inputs, progressTicks);
 		}
 
 		@Override
@@ -135,6 +144,7 @@ public class SteelForgeRecipe implements Recipe<SimpleContainer> {
 				ingredient.toNetwork(pBuffer);
 
 			pBuffer.writeItemStack(pRecipe.getResultItem(), false);
+			pBuffer.writeInt(pRecipe.getProgressTicks());
 
 		}
 

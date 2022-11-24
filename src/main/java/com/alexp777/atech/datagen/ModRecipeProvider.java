@@ -27,7 +27,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 				.unlockedBy("has_iron_block", has(Items.IRON_BLOCK))
 				.save(pFinishedRecipeConsumer);
 
-		new SteelForgeRecipeBuilder(Items.IRON_INGOT.asItem(), ModItems.STEEL_INGOT.get(), 1)
+		new SteelForgeRecipeBuilder(Items.IRON_INGOT.asItem(), ModItems.STEEL_INGOT.get(), 1, 200)
 				.unlockedBy("has_forge",
 						inventoryTrigger(ItemPredicate.Builder.item().of(Items.IRON_INGOT.asItem()).build()))
 				.save(pFinishedRecipeConsumer);

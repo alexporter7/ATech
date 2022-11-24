@@ -33,7 +33,7 @@ public class ATech
 
     public static final String MODID = "atech";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public ATech() {
 

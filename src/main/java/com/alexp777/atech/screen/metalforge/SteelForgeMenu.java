@@ -68,6 +68,13 @@ public class SteelForgeMenu extends ATechMenu {
 		return this.data.get(ModValue.STEEL_FORGE_COOLDOWN_FACTOR_DATA);
 	}
 
+	public int getMaxProgress() {
+		return this.data.get(ModValue.STEEL_FORGE_MAX_PROGRESS_DATA);
+	}
+
+	/*
+	======= Boilerplate Code =======
+	 */
 	@Override
 	public boolean stillValid(Player pPlayer) {
 		return stillValid(ContainerLevelAccess.create(level, steelForgeBlockEntity.getBlockPos()),

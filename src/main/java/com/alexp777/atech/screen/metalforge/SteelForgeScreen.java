@@ -63,7 +63,7 @@ public class SteelForgeScreen extends AbstractContainerScreen<SteelForgeMenu> {
 				CF_LABEL_X, CF_LABEL_Y, COLOR);
 		this.font.draw(pPoseStack, "HT: " + menu.getHeatTicks(), 			//Heat Ticks
 				HEAT_TICK_LABEL_X, HEAT_TICK_LABEL_Y, COLOR);
-		this.font.draw(pPoseStack, "0 %", 								//Progress
+		this.font.draw(pPoseStack, menu.getMaxProgress() + " T", 								//Progress
 				PROG_LABEL_X, PROG_LABEL_Y, COLOR);
 	}
 

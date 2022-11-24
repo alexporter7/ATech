@@ -26,6 +26,7 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 	private final Ingredient ingredient;
 	private final int count;
 	private final Advancement.Builder advancement = Advancement.Builder.advancement();
+	private final int progressTicks;
 
 	/**
 	 * Passing in information to be compiled into JSON
@@ -33,10 +34,11 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 	 * @param result This is what... yknow, results from it
 	 * @param count count of result
 	 */
-	public SteelForgeRecipeBuilder(ItemLike ingredient, ItemLike result, int count) {
+	public SteelForgeRecipeBuilder(ItemLike ingredient, ItemLike result, int count, int progressTicks) {
 		this.result = result.asItem();
 		this.ingredient = Ingredient.of(ingredient);
 		this.count = count;
+		this.progressTicks = progressTicks;
 	}
 
 
@@ -56,7 +58,7 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 			pFinishedRecipeConsumer.accept(new SteelForgeRecipeBuilder
 					.Result(pRecipeId, this.result, this.count, this.ingredient, this.advancement,
 					new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
-							+ this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath())));
+							+ this.result.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath()), this.progressTicks));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,15 +76,17 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 		private final int count;
 		private final Advancement.Builder advancement;
 		private final ResourceLocation advancementId;
+		private final int progressTicks;
 
 		public Result(ResourceLocation pId, Item pResult, int pCount, Ingredient ingredient,
-					  Advancement.Builder pAdvancement, ResourceLocation pAdvancementId) {
+					  Advancement.Builder pAdvancement, ResourceLocation pAdvancementId, int progressTicks) {
 			this.id = pId;
 			this.result = pResult;
 			this.count = pCount;
 			this.ingredient = ingredient;
 			this.advancement = pAdvancement;
 			this.advancementId = pAdvancementId;
+			this.progressTicks = progressTicks;
 		}
 
 		@Override
@@ -99,6 +103,8 @@ public class SteelForgeRecipeBuilder implements RecipeBuilder {
 				jsonObject.addProperty("count", this.count);
 
 			pJson.add("output", jsonObject);
+			JsonObject progressTicksJsonObject = new JsonObject();
+			pJson.addProperty("progressTicks", this.progressTicks);
 		}
 
 		@Override

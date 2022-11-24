@@ -7,5 +7,6 @@
   ],
   "output": {
     "item": "atech:steel_ingot"
-  }
+  },
+  "progressTicks": 200
 }
