@@ -71,26 +71,36 @@ public class ModValue {
 	//Block Entities
 	public static final String BLOCK_ENTITY_INVENTORY_KEY = "inventory";
 
-	//Steel Forge
+	/*
+	======= Steel Forge =======
+	 */
+
+	//Recipe Related
+	public static final String STEEL_FORGE_RECIPE_TYPE_ID = "steel_forging";
+
+	//NBT Tags
 	public static final String STEEL_FORGE_TEMPERATURE_TAG = "atech.forge_temperature";
 	public static final String STEEL_FORGE_HEAT_TICK_TAG = "atech.forge_heat_ticks";
 	public static final String STEEL_FORGE_COOLDOWN_FACTOR = "atech.forge_cooldown_factor";
 	public static final int STEEL_FORGE_MAX_TEMP = 200;
 
+	//Fancy IIntArray Stuff
 	public static final int STEEL_FORGE_CASE_TEMPERATURE_DATA = 0;
 	public static final int STEEL_FORGE_CASE_MAX_TEMP_DATA = 1;
 	public static final int STEEL_FORGE_COOLDOWN_FACTOR_DATA = 2;
 	public static final int STEEL_FORGE_HEAT_TICK_DATA = 3;
 	public static final int STEEL_FORGE_CONTAINER_COUNT = 4;
 
-
+	//Inventory Values
 	public static final int STEEL_FORGE_SLOTS = 3;
 
 	public static final int STEEL_FORGE_IRON_SLOT = 0;
 	public static final int STEEL_FORGE_CARBON_SLOT = 1;
 	public static final int STEEL_FORGE_OUTPUT_SLOT = 2;
 
-	//Project Table
+	/*
+	======= Project Table =======
+	 */
 	public static final int PROJECT_TABLE_SLOTS = 11;
 	public static final String PROJECT_TABLE_INVENTORY_KEY = "inventory";
 
