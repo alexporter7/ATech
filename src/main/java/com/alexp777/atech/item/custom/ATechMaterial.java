@@ -1,7 +1,9 @@
 package com.alexp777.atech.item.custom;
 
 import com.alexp777.atech.item.ModCreativeModeTab;
-import com.alexp777.atech.util.Alloy;
+import com.alexp777.atech.item.ModItems;
+import com.alexp777.atech.util.FormFactor;
+import com.alexp777.atech.util.Material;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -13,24 +15,25 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AlloyIngot extends Item {
+public class ATechMaterial extends Item {
 
 	private final double INTEGRITY_FACTOR;
 	private final int DURABILITY;
 	private final int MELTING_POINT;
-	private final String MATERIAL_INPUT;
 	private final String CHEMICAL_SYMBOL;
+	private final FormFactor FORM_FACTOR;
 
-	public AlloyIngot(Alloy alloy) {
+	public ATechMaterial(Material material, FormFactor formFactor) {
 		super(new Item.Properties()
 				.tab(ModCreativeModeTab.ATECH_TAB)
 				.fireResistant()
 				.stacksTo(64));
-		this.INTEGRITY_FACTOR = alloy.getIntegrityFactor();
-		this.DURABILITY = alloy.getDurability();
-		this.MELTING_POINT = alloy.getMeltingPoint();
-		this.MATERIAL_INPUT = alloy.getMaterialInput();
-		this.CHEMICAL_SYMBOL = alloy.getChemicalSymbol();
+		this.INTEGRITY_FACTOR = material.getIntegrityFactor();
+		this.DURABILITY = material.getDurability();
+		this.MELTING_POINT = material.getMeltingPoint();
+		this.CHEMICAL_SYMBOL = material.getChemicalSymbol();
+		this.FORM_FACTOR = formFactor;
+
 	}
 
 	@Override
@@ -43,8 +46,6 @@ public class AlloyIngot extends Item {
 				formatTextHelper(ModValue.BLUE_FORMATTER, "Integrity: ", getIntegrityFactor())));
 		pTooltipComponents.add(new TextComponent(
 				formatTextHelper(ModValue.BLUE_FORMATTER, "Durability: ", getDurability())));
-		pTooltipComponents.add(new TextComponent(
-				formatTextHelper(ModValue.BLUE_FORMATTER, "Makeup: ", getMaterialInput())));
 	}
 
 	public String formatTextHelper(String formatter, String label, String value) {
@@ -59,6 +60,14 @@ public class AlloyIngot extends Item {
 		return formatter + label + ModValue.RESET_FORMATTER + value;
 	}
 
+	public int getMeltingPoint() {
+		return this.MELTING_POINT;
+	}
+
+	public String getChemicalSymbol() {
+		return this.CHEMICAL_SYMBOL;
+	}
+
 	public double getIntegrityFactor() {
 		return this.INTEGRITY_FACTOR;
 	}
@@ -67,16 +76,8 @@ public class AlloyIngot extends Item {
 		return this.DURABILITY;
 	}
 
-	public int getMeltingPoint() {
-		return this.MELTING_POINT;
-	}
-
-	public String getMaterialInput() {
-		return this.MATERIAL_INPUT;
-	}
-
-	public String getChemicalSymbol() {
-		return this.CHEMICAL_SYMBOL;
+	public FormFactor getFormFactor() {
+		return this.FORM_FACTOR;
 	}
 
 
