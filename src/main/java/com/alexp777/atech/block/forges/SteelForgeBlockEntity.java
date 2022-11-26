@@ -125,8 +125,6 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 			if(hasRecipe(pEntity))
 				pEntity.setMaxProgress(getRecipeMaxProgress(pEntity));
 
-			ATech.LOGGER.info(String.valueOf(hasRecipe(pEntity)));
-
 			//This one's a lot, so I want to make sure that
 			//The temperature is LESS THAN 1250, it's NOT heating up, the Carbon Slot is NOT empty
 			//And the Carbon slot HAS coal in it
@@ -138,7 +136,7 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 				//If all of the above is TRUE I want to shrink the Carbon Slot by 1
 				//and add heat ticks so we can have this forge heat up
 				pEntity.getItemStackHandler().getStackInSlot(ModValue.STEEL_FORGE_CARBON_SLOT).shrink(1);
-				pEntity.addHeatTicks(10);
+				pEntity.addHeatTicks(100);
 
 			}
 
@@ -184,10 +182,9 @@ public class SteelForgeBlockEntity extends ATechBlockEntity implements MenuProvi
 		Optional<SteelForgeRecipe> match = level.getRecipeManager()
 				.getRecipeFor(SteelForgeRecipe.Type.INSTANCE, inventory, level);
 
-		return match.isPresent();
-//		return match.isPresent()
-//				&& canInsertInOutputSlot(inventory, match.get().getResultItem())
-//				&& canInsertAmountIntoOutputSlot(inventory);
+		return match.isPresent()
+				&& canInsertInOutputSlot(inventory, match.get().getResultItem())
+				&& canInsertAmountIntoOutputSlot(inventory);
 
 	}
 

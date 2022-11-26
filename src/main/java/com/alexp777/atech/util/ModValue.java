@@ -36,6 +36,7 @@ public class ModValue {
 
 	public static final String RESET_FORMATTER = "§r";
 	public static final String BLUE_FORMATTER = "§9";
+	public static final String DARK_GRAY_FORMATTER = "§8";
 
 	public static final String CREATIVE_MODE_TAB_LABEL = "atech_tab";
 
@@ -84,7 +85,7 @@ public class ModValue {
 	public static final String STEEL_FORGE_COOLDOWN_FACTOR = "atech.forge_cooldown_factor";
 	public static final String STEEL_FORGE_PROGRESS_TAG = "atech.forge_progress";
 	public static final String STEEL_FORGE_MAX_PROGRESS_TAG = "atech.forge_max_progress";
-	public static final int STEEL_FORGE_MAX_TEMP = 200;
+	public static final int STEEL_FORGE_MAX_TEMP = 3500;
 
 	//Fancy IIntArray Stuff
 	public static final int STEEL_FORGE_CASE_TEMPERATURE_DATA = 0;

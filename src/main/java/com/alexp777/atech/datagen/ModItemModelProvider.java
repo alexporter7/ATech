@@ -20,6 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 		simpleItem(ModItems.COPPER_INGOT.get());
 		simpleItem(ModItems.STEEL_INGOT.get());
 		simpleItem(ModItems.TIN_INGOT.get());
+		simpleItem(ModItems.BRONZE_INGOT.get());
 
 		simpleItem(ModItems.IRON_FLY_WHEEL.get());
 		simpleItem(ModItems.STEEL_FLY_WHEEL.get());

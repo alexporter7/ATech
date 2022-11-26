@@ -2,6 +2,7 @@ package com.alexp777.atech.item;
 
 import com.alexp777.atech.ATech;
 import com.alexp777.atech.item.custom.*;
+import com.alexp777.atech.util.Alloy;
 import com.alexp777.atech.util.Material;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.world.item.Item;
@@ -22,8 +23,12 @@ public class ModItems {
 	//Items
 	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", CustomIngot::new);
 	//public static final RegistryObject<Item> TUNGSTEN_STEEL_INGOT = ITEMS.register("tungsten_steel_ingot", CustomIngot::new);
-	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot", CustomIngot::new);
-	public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot", CustomIngot::new);
+	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot",
+			() -> new ATechIngot(1085, "Cu"));
+	public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
+			() -> new ATechIngot(232, "Sn"));
+	public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
+			() -> new AlloyIngot(Alloy.BRONZE));
 
 	//Flywheels
 	public static final RegistryObject<Item> IRON_FLY_WHEEL =
