@@ -19,13 +19,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
 	@Override
 	protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
-		ShapedRecipeBuilder.shaped(ModItems.IRON_FLY_WHEEL.get())
-				.define('I', Items.IRON_INGOT)
-				.pattern(" I ")
-				.pattern("I I")
-				.pattern(" I ")
-				.unlockedBy("has_iron_block", has(Items.IRON_BLOCK))
-				.save(pFinishedRecipeConsumer);
+//		ShapedRecipeBuilder.shaped(ModItems.IRON_FLY_WHEEL.get())
+//				.define('I', Items.IRON_INGOT)
+//				.pattern(" I ")
+//				.pattern("I I")
+//				.pattern(" I ")
+//				.unlockedBy("has_iron_block", has(Items.IRON_BLOCK))
+//				.save(pFinishedRecipeConsumer);
 
 		new SteelForgeRecipeBuilder(Items.IRON_INGOT.asItem(), ModItems.STEEL_INGOT.get(), 1, 200)
 				.unlockedBy("has_forge",
