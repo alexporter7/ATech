@@ -4,5 +4,7 @@ d307cbe429715a880e67dadcbce882a4a029af89 assets/atech/models/item/lead_ingot.jso
 1f6427cd1fa0fbc2acbfc04c5a9843b5701df474 assets/atech/models/item/nickel_ingot.json
 ee961b5f8ef080367f4955ba9d7be3a0b4e1efca assets/atech/models/item/steel_ingot.json
 df38d01a677e9439436fde9cd2c8a3c0e3f2675a assets/atech/models/item/tin_ingot.json
+f23d10dccb94d200a6d97022ce2cb2036ccd8cda data/atech/advancements/recipes/atech_tab/copper_dust.json
 ea27a1389b838b990bc91e613a3de8bd24860c2b data/atech/advancements/recipes/atech_tab/steel_ingot.json
+661325ff5d5765206c9890862db84361d21bc40d data/atech/recipes/copper_dust_from_crusher.json
 999ffcffdb00992350b7af3c0e7e0d2838681849 data/atech/recipes/steel_ingot_from_steel_forge.json

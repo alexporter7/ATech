@@ -19,13 +19,15 @@ public class CrusherRecipe implements Recipe<SimpleContainer> {
 	private final NonNullList<Ingredient> INPUT;
 	private final int TIER;
 	private final int BASE_PROGRESS;
+	private final int COUNT;
 	public CrusherRecipe(ResourceLocation id, ItemStack output, NonNullList<Ingredient> input,
-						 int tier, int baseProgress) {
+						 int tier, int baseProgress, int count) {
 		this.ID = id;
 		this.OUTPUT = output;
 		this.INPUT = input;
 		this.TIER = tier;
 		this.BASE_PROGRESS = baseProgress;
+		this.COUNT = count;
 	}
 
 	/*
@@ -37,6 +39,10 @@ public class CrusherRecipe implements Recipe<SimpleContainer> {
 
 	public int getBaseProgress() {
 		return BASE_PROGRESS;
+	}
+
+	public int getCount() {
+		return COUNT;
 	}
 
 	/*

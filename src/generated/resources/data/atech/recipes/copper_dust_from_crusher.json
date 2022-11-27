@@ -1,0 +1,14 @@
+{
+  "type": "atech:crushing",
+  "ingredient": [
+    {
+      "item": "atech:copper_ingot"
+    }
+  ],
+  "output": {
+    "item": "atech:copper_dust"
+  },
+  "tier": 1,
+  "baseProgress": 200,
+  "count": 1
+}

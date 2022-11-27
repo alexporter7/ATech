@@ -1,7 +1,11 @@
 package com.alexp777.atech.datagen.custom;
 
+import com.alexp777.atech.datagen.custom.result.CrushingRecipeResult;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -40,28 +44,38 @@ public class CrushingRecipeBuilder implements RecipeBuilder {
 		this.COUNT = count;
 	}
 
+
 	/*
 	======= Static Info =======
-	 */
+	*/
 	private final Advancement.Builder ADVANCEMENT = Advancement.Builder.advancement();
 
 	@Override
 	public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
-		return null;
+		ADVANCEMENT.addCriterion(pCriterionName, pCriterionTrigger);
+		return this;
 	}
 
 	@Override
 	public RecipeBuilder group(@Nullable String pGroupName) {
-		return null;
+		return this;
 	}
 
 	@Override
 	public Item getResult() {
-		return null;
+		return RESULT;
 	}
 
 	@Override
 	public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
+		this.ADVANCEMENT.parent(new ResourceLocation("recipes/root"))
+				.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId))
+				.rewards(AdvancementRewards.Builder.recipe(pRecipeId))
+				.requirements(RequirementsStrategy.OR);
 
+		pFinishedRecipeConsumer.accept(new CrushingRecipeResult(pRecipeId, RESULT, COUNT, INGREDIENT,
+				ADVANCEMENT, new ResourceLocation(pRecipeId.getNamespace(), "recipes/"
+					+ RESULT.getItemCategory().getRecipeFolderName() + "/" + pRecipeId.getPath()),
+				TIER, BASE_PROGRESS));
 	}
 }

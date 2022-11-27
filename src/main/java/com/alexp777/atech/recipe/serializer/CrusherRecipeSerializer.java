@@ -63,8 +63,11 @@ public class CrusherRecipeSerializer implements RecipeSerializer<CrusherRecipe> 
 		//=== Get Base Progress ===
 		int baseProgress = GsonHelper.getAsInt(pSerializedRecipe, "baseProgress");
 
+		//=== Get Count ===
+		int count = GsonHelper.getAsInt(pSerializedRecipe, "count");
+
 		//=== Return a New Recipe ===
-		return new CrusherRecipe(pRecipeId, output, input, tier, baseProgress);
+		return new CrusherRecipe(pRecipeId, output, input, tier, baseProgress, count);
 
 	}
 
@@ -86,9 +89,10 @@ public class CrusherRecipeSerializer implements RecipeSerializer<CrusherRecipe> 
 		//=== Read Tier and Base Progress from the Network ===
 		int tier = pBuffer.readInt();
 		int baseProgress = pBuffer.readInt();
+		int count = pBuffer.readInt();
 
 		//=== Return new Crusher Recipe ===
-		return new CrusherRecipe(pRecipeId, output, input, tier, baseProgress);
+		return new CrusherRecipe(pRecipeId, output, input, tier, baseProgress, count);
 
 	}
 
@@ -103,9 +107,10 @@ public class CrusherRecipeSerializer implements RecipeSerializer<CrusherRecipe> 
 		//=== Write the Resulting Item to the Network ===
 		pBuffer.writeItemStack(pRecipe.getResultItem(), false);
 
-		//=== Write Tier and Base Progress to the Network ===
+		//=== Write Tier, Base Progress, Count to the Network ===
 		pBuffer.writeInt(pRecipe.getTier());
 		pBuffer.writeInt(pRecipe.getBaseProgress());
+		pBuffer.writeInt(pRecipe.getCount());
 
 	}
 
