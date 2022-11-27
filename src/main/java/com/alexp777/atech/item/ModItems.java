@@ -64,9 +64,16 @@ public class ModItems {
 	======= Components =======
 	 */
 
+	//Motors
 	public static final RegistryObject<Item> BASIC_MOTOR = ITEMS.register("basic_motor",
 			() -> new ATechComponentItem(ATechComponent.BASIC_MOTOR));
 
+
+	//Press Plates
+	public static final RegistryObject<Item> IRON_PRESS_PLATE = ITEMS.register("iron_press_plate",
+			() -> new ATechComponentItem(ATechComponent.IRON_PRESS_PLATE));
+
+	//Blades
 
 	/*
 	======= Engine Parts =======

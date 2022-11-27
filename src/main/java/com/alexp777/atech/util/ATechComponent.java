@@ -2,7 +2,8 @@ package com.alexp777.atech.util;
 
 public enum ATechComponent {
 
-	BASIC_MOTOR(1, 5, ATechMaterial.COPPER, FormFactor.MOTOR);
+	BASIC_MOTOR(1, 5, ATechMaterial.COPPER, FormFactor.MOTOR),
+	IRON_PRESS_PLATE(2, 1, ATechMaterial.IRON, FormFactor.PRESS_PLATE);
 
 	/*
 	Tier Determines what level of ore/item can be handled
