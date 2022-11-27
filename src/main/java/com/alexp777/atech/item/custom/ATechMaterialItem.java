@@ -1,9 +1,8 @@
 package com.alexp777.atech.item.custom;
 
 import com.alexp777.atech.item.ModCreativeModeTab;
-import com.alexp777.atech.item.ModItems;
+import com.alexp777.atech.util.ATechMaterial;
 import com.alexp777.atech.util.FormFactor;
-import com.alexp777.atech.util.Material;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -15,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ATechMaterial extends Item {
+public class ATechMaterialItem extends Item {
 
 	private final double INTEGRITY_FACTOR;
 	private final int DURABILITY;
@@ -23,7 +22,7 @@ public class ATechMaterial extends Item {
 	private final String CHEMICAL_SYMBOL;
 	private final FormFactor FORM_FACTOR;
 
-	public ATechMaterial(Material material, FormFactor formFactor) {
+	public ATechMaterialItem(ATechMaterial material, FormFactor formFactor) {
 		super(new Item.Properties()
 				.tab(ModCreativeModeTab.ATECH_TAB)
 				.fireResistant()

@@ -2,9 +2,9 @@ package com.alexp777.atech.item;
 
 import com.alexp777.atech.ATech;
 import com.alexp777.atech.item.custom.*;
-import com.alexp777.atech.util.Alloy;
+import com.alexp777.atech.util.ATechComponent;
 import com.alexp777.atech.util.FormFactor;
-import com.alexp777.atech.util.Material;
+import com.alexp777.atech.util.ATechMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -28,38 +28,44 @@ public class ModItems {
 	 */
 
 	public static final RegistryObject<Item> IRON_ROD = ITEMS.register("iron_rod",
-			() -> new ATechMaterial(Material.IRON, FormFactor.ROD));
+			() -> new ATechMaterialItem(ATechMaterial.IRON, FormFactor.ROD));
 	public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate",
-			() -> new ATechMaterial(Material.IRON, FormFactor.PLATE));
+			() -> new ATechMaterialItem(ATechMaterial.IRON, FormFactor.PLATE));
 
 	/*
 	======= Custom Materials =======
 	 */
 	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot",
-			() -> new ATechMaterial(Material.COPPER, FormFactor.INGOT));
+			() -> new ATechMaterialItem(ATechMaterial.COPPER, FormFactor.INGOT));
 	public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust",
-			() -> new ATechMaterial(Material.COPPER, FormFactor.DUST));
+			() -> new ATechMaterialItem(ATechMaterial.COPPER, FormFactor.DUST));
 	public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
-			() -> new ATechMaterial(Material.TIN, FormFactor.INGOT));
+			() -> new ATechMaterialItem(ATechMaterial.TIN, FormFactor.INGOT));
 	public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust",
-			() -> new ATechMaterial(Material.TIN, FormFactor.DUST));
+			() -> new ATechMaterialItem(ATechMaterial.TIN, FormFactor.DUST));
 
 	public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot",
-			() -> new ATechMaterial(Material.NICKEL, FormFactor.INGOT));
+			() -> new ATechMaterialItem(ATechMaterial.NICKEL, FormFactor.INGOT));
 	public static final RegistryObject<Item> NICKEL_DUST = ITEMS.register("nickel_dust",
-			() -> new ATechMaterial(Material.NICKEL, FormFactor.DUST));
+			() -> new ATechMaterialItem(ATechMaterial.NICKEL, FormFactor.DUST));
 
 	public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot",
-			() -> new ATechMaterial(Material.LEAD, FormFactor.INGOT));
+			() -> new ATechMaterialItem(ATechMaterial.LEAD, FormFactor.INGOT));
 	public static final RegistryObject<Item> LEAD_DUST = ITEMS.register("lead_dust",
-			() -> new ATechMaterial(Material.LEAD, FormFactor.DUST));
+			() -> new ATechMaterialItem(ATechMaterial.LEAD, FormFactor.DUST));
 
 	/*
 	======= Alloys =======
 	 */
-	public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
-			() -> new ATechAlloy(Alloy.BRONZE, FormFactor.INGOT));
 
+
+
+	/*
+	======= Components =======
+	 */
+
+	public static final RegistryObject<Item> BASIC_MOTOR = ITEMS.register("basic_motor",
+			() -> new ATechComponentItem(ATechComponent.BASIC_MOTOR));
 
 
 	/*
@@ -86,9 +92,9 @@ public class ModItems {
 		ITEMS.register(eventBus);
 	}
 
-	public static void registerFullMaterial(String baseName, Material material) {
-		ITEMS.register(baseName + "_ingot", () -> new ATechMaterial(material, FormFactor.INGOT));
-		ITEMS.register(baseName + "_dust", () -> new ATechMaterial(material, FormFactor.DUST));
+	public static void registerFullMaterial(String baseName, ATechMaterial material) {
+		ITEMS.register(baseName + "_ingot", () -> new ATechMaterialItem(material, FormFactor.INGOT));
+		ITEMS.register(baseName + "_dust", () -> new ATechMaterialItem(material, FormFactor.DUST));
 	}
 
 }

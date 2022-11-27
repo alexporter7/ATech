@@ -105,15 +105,21 @@ public class ModValue {
 
 	/*
 	======= Crusher =======
+	The Crusher has one Item Input slot that takes in Ore
+
+	There are two (2) component Slots
+		1. Piston Slot - Piston Component determines machine speed
+		2. Plate Slot - Hardness/Integrity determines maximum ore tier
 	 */
 
 	//=== Slot Info ===
-	public static final int CRUSHER_SLOTS = 4;
+	public static final int CRUSHER_SLOTS = 5;
 
 	public static final int CRUSHER_INPUT_SLOT = 0;
 	public static final int CRUSHER_ENERGY_SLOT = 1;
-	public static final int CRUSHER_BLADE_SLOT = 2;
-	public static final int CRUSHER_OUTPUT_SLOT = 3;
+	public static final int CRUSHER_PISTON_SLOT = 2;
+	public static final int CRUSHER_PRESS_PLATE_SLOT = 3;
+	public static final int CRUSHER_OUTPUT_SLOT = 4;
 
 	//=== NBT DATA ===
 	public static final String CRUSHER_MODIFIER_KEY = "crusher_modifier";

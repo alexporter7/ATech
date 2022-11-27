@@ -17,14 +17,25 @@ public class ModItemModelProvider extends ItemModelProvider {
 	@Override
 	protected void registerModels() {
 
+		/*
+		======= Materials =======
+		 */
 		simpleItem(ModItems.COPPER_INGOT.get());
 		simpleItem(ModItems.STEEL_INGOT.get());
 		simpleItem(ModItems.TIN_INGOT.get());
-		simpleItem(ModItems.BRONZE_INGOT.get());
+		simpleItem(ModItems.NICKEL_INGOT.get());
+		simpleItem(ModItems.LEAD_INGOT.get());
 
-//		simpleItem(ModItems.IRON_FLY_WHEEL.get());
-//		simpleItem(ModItems.STEEL_FLY_WHEEL.get());
-//		simpleItem(ModItems.TUNGSTEN_STEEL_FLY_WHEEL.get());
+		/*
+		======= Alloys =======
+		 */
+
+
+		/*
+		======= Motors =======
+		 */
+		simpleItem(ModItems.BASIC_MOTOR.get());
+
 
 	}
 

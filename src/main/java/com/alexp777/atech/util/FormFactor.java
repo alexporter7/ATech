@@ -6,5 +6,8 @@ public enum FormFactor {
 	SMALL_DUST,
 	TINY_DUST,
 	PLATE,
-	ROD
+	ROD,
+	MOTOR,
+	PISTON,
+	PRESS_PLATE;
 }

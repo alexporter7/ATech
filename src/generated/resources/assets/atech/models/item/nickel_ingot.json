@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "atech:item/iron_fly_wheel"
+    "layer0": "atech:item/nickel_ingot"
   }
 }

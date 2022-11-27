@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "atech:item/tungsten_steel_fly_wheel"
+    "layer0": "atech:item/lead_ingot"
   }
 }
