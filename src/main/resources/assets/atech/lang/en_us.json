@@ -12,6 +12,8 @@
   "item.atech.engine_block": "Engine Block",
 
   "block.atech.project_table": "Project Table",
+  "block.atech.steel_forge": "Steel Forge",
+  "block.atech.crusher": "Crusher",
 
   "itemGroup.atech_tab": "ATech"
 }
