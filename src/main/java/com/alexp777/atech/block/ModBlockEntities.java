@@ -2,6 +2,7 @@ package com.alexp777.atech.block;
 
 import com.alexp777.atech.ATech;
 import com.alexp777.atech.block.forges.SteelForgeBlockEntity;
+import com.alexp777.atech.block.machines.CrusherBlockEntity;
 import com.alexp777.atech.block.worktables.ProjectTableBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
@@ -25,6 +26,11 @@ public class ModBlockEntities {
 	public static final RegistryObject<BlockEntityType<SteelForgeBlockEntity>> STEEL_FORGE_BLOCK_ENTITY =
 			BLOCK_ENTITIES.register("steel_forge_block_entity",
 					() -> BlockEntityType.Builder.of(SteelForgeBlockEntity::new, ModBlocks.STEEL_FORGE.get())
+							.build(null));
+
+	public static final RegistryObject<BlockEntityType<CrusherBlockEntity>> CRUSHER_BLOCK_ENTITY =
+			BLOCK_ENTITIES.register("crusher_block_entity",
+					() -> BlockEntityType.Builder.of(CrusherBlockEntity::new, ModBlocks.CRUSHER.get())
 							.build(null));
 	public static void register(IEventBus eventBus) {
 		BLOCK_ENTITIES.register(eventBus);

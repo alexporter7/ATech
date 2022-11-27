@@ -2,6 +2,7 @@ package com.alexp777.atech.block.blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -19,6 +20,8 @@ public class ATechBaseEntityBlock extends BaseEntityBlock {
 		return null;
 	}
 
-
-
+	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
 }

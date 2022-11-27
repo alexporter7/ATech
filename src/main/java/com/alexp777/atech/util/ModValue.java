@@ -104,6 +104,31 @@ public class ModValue {
 	public static final int STEEL_FORGE_OUTPUT_SLOT = 2;
 
 	/*
+	======= Crusher =======
+	 */
+
+	//=== Slot Info ===
+	public static final int CRUSHER_SLOTS = 4;
+
+	public static final int CRUSHER_INPUT_SLOT = 0;
+	public static final int CRUSHER_ENERGY_SLOT = 1;
+	public static final int CRUSHER_BLADE_SLOT = 2;
+	public static final int CRUSHER_OUTPUT_SLOT = 3;
+
+	//=== NBT DATA ===
+	public static final String CRUSHER_MODIFIER_KEY = "crusher_modifier";
+	public static final String CRUSHER_PROGRESS_KEY = "crusher_progress";
+	public static final String CRUSHER_MAX_PROGRESS_KEY = "crusher_max_progress";
+
+	//=== Fancy IIntArray Stuff ===
+
+	public static final int CRUSHER_DATA_SIZE = 3;
+
+	public static final int CRUSHER_MODIFIER_DATA = 0;
+	public static final int CRUSHER_PROGRESS_DATA = 1;
+	public static final int CRUSHER_MAX_PROGRESS_DATA = 2;
+
+	/*
 	======= Project Table =======
 	 */
 	public static final int PROJECT_TABLE_SLOTS = 11;

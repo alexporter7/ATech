@@ -22,16 +22,31 @@ public class ModItems {
 
 	//Items
 	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", CustomIngot::new);
-	//public static final RegistryObject<Item> TUNGSTEN_STEEL_INGOT = ITEMS.register("tungsten_steel_ingot", CustomIngot::new);
+
+	/*
+	======= Materials =======
+	 */
 	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot",
 			() -> new ATechMaterial(Material.COPPER, FormFactor.INGOT));
 	public static final RegistryObject<Item> COPPER_DUST = ITEMS.register("copper_dust",
 			() -> new ATechMaterial(Material.COPPER, FormFactor.DUST));
 	public static final RegistryObject<Item> TIN_INGOT = ITEMS.register("tin_ingot",
 			() -> new ATechMaterial(Material.TIN, FormFactor.INGOT));
+	public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust",
+			() -> new ATechMaterial(Material.TIN, FormFactor.DUST));
+
+
+	/*
+	======= Alloys =======
+	 */
 	public static final RegistryObject<Item> BRONZE_INGOT = ITEMS.register("bronze_ingot",
 			() -> new ATechAlloy(Alloy.BRONZE, FormFactor.INGOT));
 
+
+
+	/*
+	======= Engine Parts =======
+	 */
 	//Connecting Rods
 	public static final RegistryObject<Item> CONNECTING_ROD =
 			ITEMS.register("connecting_rod", ConnectingRodItem::new);
@@ -51,6 +66,11 @@ public class ModItems {
 	 */
 	public static void register(IEventBus eventBus) {
 		ITEMS.register(eventBus);
+	}
+
+	public static void registerFullMaterial(String baseName, Material material) {
+		ITEMS.register(baseName + "_ingot", () -> new ATechMaterial(material, FormFactor.INGOT));
+		ITEMS.register(baseName + "_dust", () -> new ATechMaterial(material, FormFactor.DUST));
 	}
 
 }
