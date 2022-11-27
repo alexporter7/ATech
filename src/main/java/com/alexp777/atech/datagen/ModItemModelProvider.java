@@ -22,9 +22,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 		simpleItem(ModItems.TIN_INGOT.get());
 		simpleItem(ModItems.BRONZE_INGOT.get());
 
-		simpleItem(ModItems.IRON_FLY_WHEEL.get());
-		simpleItem(ModItems.STEEL_FLY_WHEEL.get());
-		simpleItem(ModItems.TUNGSTEN_STEEL_FLY_WHEEL.get());
+//		simpleItem(ModItems.IRON_FLY_WHEEL.get());
+//		simpleItem(ModItems.STEEL_FLY_WHEEL.get());
+//		simpleItem(ModItems.TUNGSTEN_STEEL_FLY_WHEEL.get());
 
 	}
 
