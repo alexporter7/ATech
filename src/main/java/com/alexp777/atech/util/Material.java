@@ -5,6 +5,7 @@ public enum Material {
 	COPPER(0.85, 300, 1085, "Cu"),
 	TIN(0.70, 200, 232, "Sn"),
 	NICKEL(0, 0, 0, "Ni"),
+	IRON(0, 0, 0, "Fe"),
 	LEAD(0, 0, 0, "Pb");
 	private final double INTEGRITY_FACTOR;
 	private final int DURABILITY;

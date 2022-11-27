@@ -24,7 +24,16 @@ public class ModItems {
 	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", CustomIngot::new);
 
 	/*
-	======= Materials =======
+	======= Custom Parts =======
+	 */
+
+	public static final RegistryObject<Item> IRON_ROD = ITEMS.register("iron_rod",
+			() -> new ATechMaterial(Material.IRON, FormFactor.ROD));
+	public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate",
+			() -> new ATechMaterial(Material.IRON, FormFactor.PLATE));
+
+	/*
+	======= Custom Materials =======
 	 */
 	public static final RegistryObject<Item> COPPER_INGOT = ITEMS.register("copper_ingot",
 			() -> new ATechMaterial(Material.COPPER, FormFactor.INGOT));
@@ -35,6 +44,15 @@ public class ModItems {
 	public static final RegistryObject<Item> TIN_DUST = ITEMS.register("tin_dust",
 			() -> new ATechMaterial(Material.TIN, FormFactor.DUST));
 
+	public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot",
+			() -> new ATechMaterial(Material.NICKEL, FormFactor.INGOT));
+	public static final RegistryObject<Item> NICKEL_DUST = ITEMS.register("nickel_dust",
+			() -> new ATechMaterial(Material.NICKEL, FormFactor.DUST));
+
+	public static final RegistryObject<Item> LEAD_INGOT = ITEMS.register("lead_ingot",
+			() -> new ATechMaterial(Material.LEAD, FormFactor.INGOT));
+	public static final RegistryObject<Item> LEAD_DUST = ITEMS.register("lead_dust",
+			() -> new ATechMaterial(Material.LEAD, FormFactor.DUST));
 
 	/*
 	======= Alloys =======

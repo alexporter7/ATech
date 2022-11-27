@@ -1,5 +1,8 @@
 {
   "variants": {
-    "": {"model": "atech:block/crusher"}
+    "facing=north": {"model": "atech:block/crusher"},
+    "facing=east": {"model": "atech:block/crusher", "y": 90},
+    "facing=south": {"model": "atech:block/crusher", "y": 180},
+    "facing=west": {"model": "atech:block/crusher", "y": 270}
   }
 }

@@ -1,11 +1,18 @@
 {
-  "item.atech.iron_fly_wheel": "Iron Fly Wheel",
-  "item.atech.steel_fly_wheel": "Steel Fly Wheel",
-  "item.atech.tungsten_steel_fly_wheel": "Tungsten Steel Fly Wheel",
-
   "item.atech.steel_ingot": "Steel Ingot",
   "item.atech.copper_ingot": "Copper Ingot",
   "item.atech.tin_ingot": "Tin Ingot",
+  "item.atech.nickel_ingot": "Nickel Ingot",
+  "item.atech.lead_ingot": "Lead Ingot",
+
+  "item.atech.copper_dust": "Copper Dust",
+  "item.atech.tin_dust": "Tin Dust",
+  "item.atech.nickel_dust": "Nickel Dust",
+  "item.atech.lead_dust": "Lead Dust",
+
+  "item.atech.iron_rod": "Iron Rod",
+
+  "item.atech.iron_plate": "Iron Plate",
 
   "item.atech.connecting_rod": "Connecting Rod",
   "item.atech.piston": "Piston",
