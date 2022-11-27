@@ -112,6 +112,9 @@ public class ModValue {
 		2. Plate Slot - Hardness/Integrity determines maximum ore tier
 	 */
 
+	//=== Recipe ===
+	public static final String CRUSHING_RECIPE_KEY = "crushing";
+
 	//=== Slot Info ===
 	public static final int CRUSHER_SLOTS = 5;
 
