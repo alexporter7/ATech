@@ -36,6 +36,11 @@ public class ModItemModelProvider extends ItemModelProvider {
 		 */
 		simpleItem(ModItems.BASIC_MOTOR.get());
 
+		/*
+		======= Pistons =======
+		 */
+		simpleItem(ModItems.BASIC_PISTON.get());
+
 
 	}
 

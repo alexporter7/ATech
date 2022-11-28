@@ -75,6 +75,10 @@ public class ModItems {
 
 	//Blades
 
+	//Pistons
+	public static final RegistryObject<Item> BASIC_PISTON = ITEMS.register("basic_piston",
+			() -> new ATechComponentItem(ATechComponent.BASIC_PISTON));
+
 	/*
 	======= Engine Parts =======
 	 */
