@@ -52,15 +52,15 @@ public class CrusherMenu extends ATechMenu {
 		CRUSHER_BLOCK_ENTITY.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 				.ifPresent(iItemHandler -> {
 					this.addSlot(new SlotItemHandler(iItemHandler, ModValue.CRUSHER_INPUT_SLOT,
-							24, 15));
+							25, 16));
 					this.addSlot(new SlotItemHandler(iItemHandler, ModValue.CRUSHER_ENERGY_SLOT,
-							24, 37));
+							25, 37));
 					this.addSlot(new SlotItemHandler(iItemHandler, ModValue.CRUSHER_PISTON_SLOT,
-							149, 13));
+							150, 15));
 					this.addSlot(new SlotItemHandler(iItemHandler, ModValue.CRUSHER_PRESS_PLATE_SLOT,
-							149, 32));
+							150, 33));
 					this.addSlot(new ModResultSlot(iItemHandler, ModValue.CRUSHER_OUTPUT_SLOT,
-							46, 15));
+							49, 16));
 				});
 
 		/*

@@ -2,6 +2,7 @@ package com.alexp777.atech.block.machines;
 
 import com.alexp777.atech.block.ATechMachineEntity;
 import com.alexp777.atech.block.ModBlockEntities;
+import com.alexp777.atech.screen.machine.CrusherMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvider {
 
+
+	/*
+	======= Instance Variables =======
+	 */
 	private int modifier = 0;
 	private int progress = 0;
 	private int maxProgress = 0;
@@ -71,7 +76,7 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-		return null;
+		return new CrusherMenu(pContainerId, pPlayerInventory, this, this.data);
 	}
 
 	/*

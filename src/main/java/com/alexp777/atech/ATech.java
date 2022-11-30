@@ -5,6 +5,8 @@ import com.alexp777.atech.block.ModBlocks;
 import com.alexp777.atech.item.ModItems;
 import com.alexp777.atech.recipe.ModRecipes;
 import com.alexp777.atech.screen.ModMenuTypes;
+import com.alexp777.atech.screen.machine.CrusherMenu;
+import com.alexp777.atech.screen.machine.CrusherScreen;
 import com.alexp777.atech.screen.metalforge.SteelForgeScreen;
 import com.alexp777.atech.screen.worktable.ProjectTableScreen;
 import com.mojang.logging.LogUtils;
@@ -102,5 +104,6 @@ public class ATech
     private void clientSetup(final FMLClientSetupEvent event) {
         MenuScreens.register(ModMenuTypes.PROJECT_TABLE_MENU.get(), ProjectTableScreen::new);
         MenuScreens.register(ModMenuTypes.STEEL_FORGE_MENU.get(), SteelForgeScreen::new);
+        MenuScreens.register(ModMenuTypes.CRUSHER_MENU.get(), CrusherScreen::new);
     }
 }

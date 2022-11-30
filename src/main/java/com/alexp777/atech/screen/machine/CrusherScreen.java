@@ -22,9 +22,14 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
 
+	@Override
+	protected void init() {
+		super.init();
+	}
+
 	/*
-	======= Render the Background =======
-	 */
+		======= Render the Background =======
+		 */
 	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
@@ -51,6 +56,8 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 
 	@Override
 	public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
+		renderBackground(pPoseStack);
 		super.render(pPoseStack, pMouseX, pMouseY, pPartialTick);
+		renderTooltip(pPoseStack, pMouseX, pMouseY);
 	}
 }
