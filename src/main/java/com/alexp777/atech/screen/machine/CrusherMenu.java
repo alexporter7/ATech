@@ -85,6 +85,14 @@ public class CrusherMenu extends ATechMenu {
 		return DATA.get(ModValue.CRUSHER_MAX_PROGRESS_DATA);
 	}
 
+	public int getHasRecipe() {
+		return DATA.get(ModValue.CRUSHER_HAS_RECIPE_DATA);
+	}
+
+	public int getRecipeTier() {
+		return DATA.get(ModValue.CRUSHER_RECIPE_TIER);
+	}
+
 	/*
 	======= Still Valid Method
 	 */

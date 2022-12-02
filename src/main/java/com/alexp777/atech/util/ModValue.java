@@ -131,11 +131,13 @@ public class ModValue {
 
 	//=== Fancy IIntArray Stuff ===
 
-	public static final int CRUSHER_DATA_SIZE = 3;
+	public static final int CRUSHER_DATA_SIZE = 5;
 
 	public static final int CRUSHER_MODIFIER_DATA = 0;
 	public static final int CRUSHER_PROGRESS_DATA = 1;
 	public static final int CRUSHER_MAX_PROGRESS_DATA = 2;
+	public static final int CRUSHER_HAS_RECIPE_DATA = 3;
+	public static final int CRUSHER_RECIPE_TIER = 4;
 
 	/*
 	======= Project Table =======

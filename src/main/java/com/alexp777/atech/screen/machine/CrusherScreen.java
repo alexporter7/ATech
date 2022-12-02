@@ -11,6 +11,22 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 
+	//Degrees Label
+	private final float RECIPE_LABEL_X = 75;
+	private final float RECIPE_LABEL_Y = 7;
+
+	private final float PROGRESS_LABEL_X = 75;
+	private final float PROGRESS_LABEL_Y = 16;
+
+	private final float MAX_PROGRESS_LABEL_X = 75;
+	private final float MAX_PROGRESS_LABEL_Y = 25;
+
+	private final float MODIFIER_LABEL_X = 75;
+	private final float MODIFIER_LABEL_Y = 34;
+
+	private final float TIER_LABEL_X = 75;
+	private final float TIER_LABEL_Y = 43;
+
 	private final int COLOR = -12829636;
 	private static final ResourceLocation TEXTURE =
 			new ResourceLocation(ATech.MODID, "textures/gui/crusher.png");
@@ -22,14 +38,14 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 		super(pMenu, pPlayerInventory, pTitle);
 	}
 
-	@Override
-	protected void init() {
-		super.init();
-	}
+	//	@Override
+	//	protected void init() {
+	//		super.init();
+	//	}
 
 	/*
-		======= Render the Background =======
-		 */
+	 * ======= Render the Background =======
+	 */
 	@Override
 	protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pMouseX, int pMouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
@@ -46,12 +62,22 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 	}
 
 	/*
-	======= Render Labels (Progress, MaxProgress, Modifier) =======
+	 * ======= Render Labels (Progress, MaxProgress, Modifier) =======
 	 */
 
 	@Override
 	protected void renderLabels(PoseStack pPoseStack, int pMouseX, int pMouseY) {
 		super.renderLabels(pPoseStack, pMouseX, pMouseY);
+		this.font.draw(pPoseStack, "Recipe: " + (menu.getHasRecipe() == 1 ? "true" : "false"), 	//Has Recipe
+				RECIPE_LABEL_X, RECIPE_LABEL_Y, COLOR);
+		this.font.draw(pPoseStack, "Progress: " + menu.getProgress(), 							//Progress
+				PROGRESS_LABEL_X, PROGRESS_LABEL_Y, COLOR);
+		this.font.draw(pPoseStack, "mProgress: " + menu.getMaxProgress(), 						//Max Progress
+				MAX_PROGRESS_LABEL_X, MAX_PROGRESS_LABEL_Y, COLOR);
+		this.font.draw(pPoseStack, "Modifier: " + menu.getModifier(), 							//Modifier
+				MODIFIER_LABEL_X, MODIFIER_LABEL_Y, COLOR);
+		this.font.draw(pPoseStack, "Tier: " + menu.getRecipeTier(), 								//Tier
+				TIER_LABEL_X, TIER_LABEL_Y, COLOR);
 	}
 
 	@Override

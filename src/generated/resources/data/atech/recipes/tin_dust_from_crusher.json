@@ -1,0 +1,14 @@
+{
+  "type": "atech:crushing",
+  "ingredient": [
+    {
+      "item": "atech:tin_ingot"
+    }
+  ],
+  "output": {
+    "item": "atech:tin_dust"
+  },
+  "tier": 1,
+  "baseProgress": 150,
+  "count": 1
+}

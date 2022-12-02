@@ -2,6 +2,8 @@ package com.alexp777.atech.block.machines;
 
 import com.alexp777.atech.block.ATechMachineEntity;
 import com.alexp777.atech.block.ModBlockEntities;
+import com.alexp777.atech.recipe.CrusherRecipe;
+import com.alexp777.atech.recipe.ModRecipeTypes;
 import com.alexp777.atech.screen.machine.CrusherMenu;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
@@ -9,6 +11,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,8 +20,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvider {
+import java.util.Optional;
 
+public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvider {
 
 	/*
 	======= Instance Variables =======
@@ -26,6 +30,10 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	private int modifier = 0;
 	private int progress = 0;
 	private int maxProgress = 0;
+
+	//These aren't saved in NBT since they're set in tick
+	private int hasRecipeFlag = 0;
+	private int recipeTier = 0;
 
 	protected final ContainerData data;
 
@@ -44,6 +52,8 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 					case ModValue.CRUSHER_MODIFIER_DATA -> CrusherBlockEntity.this.modifier;
 					case ModValue.CRUSHER_PROGRESS_DATA -> CrusherBlockEntity.this.progress;
 					case ModValue.CRUSHER_MAX_PROGRESS_DATA -> CrusherBlockEntity.this.maxProgress;
+					case ModValue.CRUSHER_HAS_RECIPE_DATA -> CrusherBlockEntity.this.hasRecipeFlag;
+					case ModValue.CRUSHER_RECIPE_TIER -> CrusherBlockEntity.this.recipeTier;
 					default -> 0;
 				};
 			}
@@ -54,6 +64,8 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 					case ModValue.CRUSHER_MODIFIER_DATA -> CrusherBlockEntity.this.modifier = pValue;
 					case ModValue.CRUSHER_PROGRESS_DATA -> CrusherBlockEntity.this.progress = pValue;
 					case ModValue.CRUSHER_MAX_PROGRESS_DATA -> CrusherBlockEntity.this.maxProgress = pValue;
+					case ModValue.CRUSHER_HAS_RECIPE_DATA -> CrusherBlockEntity.this.hasRecipeFlag = pValue;
+					case ModValue.CRUSHER_RECIPE_TIER -> CrusherBlockEntity.this.recipeTier = pValue;
 				}
 			}
 
@@ -87,13 +99,18 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 
 		//Check if Server Side
 		//Check if Piston and Press Plate is present
-			//If blade IS present check for recipe
-				//If blade AND recipe present and not at max progress start work
-					//Random chance blade damage
+			//If Press Plate IS present check for recipe
+				//If Press Plate AND recipe present and not at max progress start work
+					//Random chance Press Plate damage
 					//Work
-				//If blade and recipe present but at max progress
+				//If Press Plate and recipe present but at max progress
 					//put output item
 					//decrement input item
+		if(!level.isClientSide()) {
+			entity.setHasRecipe(hasRecipe(entity) ? 1 : 0);
+			entity.setRecipeTier(getRecipeTier(entity));
+			entity.setModifier(10);
+		}
 
 	}
 
@@ -121,12 +138,51 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	======= Recipe Methods =======
 	 */
 
+	//TODO Fix these so it calculates the inventory once instead of like 30 times
+
 	public static boolean hasRecipe(CrusherBlockEntity entity) {
-		return false;
+
+		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
+		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
+			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
+
+		assert entity.level != null;
+		Optional<CrusherRecipe> match = entity.level.getRecipeManager()
+				.getRecipeFor(ModRecipeTypes.CrusherRecipeType.INSTANCE, inventory, entity.level);
+
+		return match.isPresent();
+	}
+
+	public static int getRecipeTier(CrusherBlockEntity entity) {
+		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
+		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
+			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
+
+		assert entity.level != null;
+		Optional<CrusherRecipe> match = entity.level.getRecipeManager()
+				.getRecipeFor(ModRecipeTypes.CrusherRecipeType.INSTANCE, inventory, entity.level);
+
+		return (match.isPresent() ? match.get().getTier() : 0);
 	}
 
 	public static int getRecipeMaxProgress(CrusherBlockEntity entity) {
 		return 0;
+	}
+
+	public void setHasRecipe(int flag) {
+		this.hasRecipeFlag = flag;
+	}
+
+	public int getHasRecipe() {
+		return this.hasRecipeFlag;
+	}
+
+	public void setRecipeTier(int tier) {
+		this.recipeTier = tier;
+	}
+
+	public int getRecipeTier() {
+		return this.recipeTier;
 	}
 
 

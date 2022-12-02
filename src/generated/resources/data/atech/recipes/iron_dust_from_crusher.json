@@ -1,0 +1,14 @@
+{
+  "type": "atech:crushing",
+  "ingredient": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "item": "atech:iron_dust"
+  },
+  "tier": 2,
+  "baseProgress": 250,
+  "count": 1
+}

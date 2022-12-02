@@ -31,6 +31,8 @@ public class ModItems {
 			() -> new ATechMaterialItem(ATechMaterial.IRON, FormFactor.ROD));
 	public static final RegistryObject<Item> IRON_PLATE = ITEMS.register("iron_plate",
 			() -> new ATechMaterialItem(ATechMaterial.IRON, FormFactor.PLATE));
+	public static final RegistryObject<Item> IRON_DUST = ITEMS.register("iron_dust",
+			() -> new ATechMaterialItem(ATechMaterial.IRON, FormFactor.DUST));
 
 	/*
 	======= Custom Materials =======

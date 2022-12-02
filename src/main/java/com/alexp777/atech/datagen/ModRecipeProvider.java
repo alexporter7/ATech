@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.conditions.IConditionBuilder;
 
 import java.util.function.Consumer;
@@ -26,8 +27,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 						inventoryTrigger(ItemPredicate.Builder.item().of(Items.IRON_INGOT.asItem()).build()))
 				.save(pFinishedRecipeConsumer);
 
-		new CrushingRecipeBuilder(ModItems.COPPER_INGOT.get(), ModItems.COPPER_DUST.get(), 1, 200, 1)
-				.unlockedBy("has_crusher", inventoryTrigger(ItemPredicate.Builder.item().of(ModItems.COPPER_INGOT.get()).build()))
+
+		/*
+		 * ======= Crusher Recipes =======
+		 */
+		createCrushingRecipe(ModItems.COPPER_INGOT.get(), ModItems.COPPER_DUST.get(), 1, 200, 1, pFinishedRecipeConsumer);
+		createCrushingRecipe(ModItems.TIN_INGOT.get(), ModItems.TIN_DUST.get(), 1, 150, 1, pFinishedRecipeConsumer);
+		createCrushingRecipe(Items.IRON_INGOT, ModItems.IRON_DUST.get(), 2, 250, 1, pFinishedRecipeConsumer);
+
+
+	}
+
+	private void createCrushingRecipe(ItemLike input, ItemLike output, int tier, int baseProgress, int count,
+									  Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+		new CrushingRecipeBuilder(input, output, tier, baseProgress, count)
+				.unlockedBy("has_crusher", inventoryTrigger(ItemPredicate.Builder.item().of(input).build()))
 				.save(pFinishedRecipeConsumer);
 	}
 }
