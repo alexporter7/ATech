@@ -72,7 +72,7 @@ public class CrusherScreen extends AbstractContainerScreen<CrusherMenu> {
 				RECIPE_LABEL_X, RECIPE_LABEL_Y, COLOR);
 		this.font.draw(pPoseStack, "Progress: " + menu.getProgress(), 							//Progress
 				PROGRESS_LABEL_X, PROGRESS_LABEL_Y, COLOR);
-		this.font.draw(pPoseStack, "mProgress: " + menu.getMaxProgress(), 						//Max Progress
+		this.font.draw(pPoseStack, "mProg: " + menu.getMaxProgress(), 							//Max Progress
 				MAX_PROGRESS_LABEL_X, MAX_PROGRESS_LABEL_Y, COLOR);
 		this.font.draw(pPoseStack, "Modifier: " + menu.getModifier(), 							//Modifier
 				MODIFIER_LABEL_X, MODIFIER_LABEL_Y, COLOR);

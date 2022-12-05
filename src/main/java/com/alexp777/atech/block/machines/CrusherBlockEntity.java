@@ -2,9 +2,11 @@ package com.alexp777.atech.block.machines;
 
 import com.alexp777.atech.block.ATechMachineEntity;
 import com.alexp777.atech.block.ModBlockEntities;
+import com.alexp777.atech.item.custom.ATechComponentItem;
 import com.alexp777.atech.recipe.CrusherRecipe;
 import com.alexp777.atech.recipe.ModRecipeTypes;
 import com.alexp777.atech.screen.machine.CrusherMenu;
+import com.alexp777.atech.util.FormFactor;
 import com.alexp777.atech.util.ModValue;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
@@ -107,9 +110,72 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 					//put output item
 					//decrement input item
 		if(!level.isClientSide()) {
-			entity.setHasRecipe(hasRecipe(entity) ? 1 : 0);
-			entity.setRecipeTier(getRecipeTier(entity));
-			entity.setModifier(10);
+
+			/*
+			 * ======= Screen Setup =======
+			 */
+
+			//Get Inventory Optional
+			Optional<CrusherRecipe> match = getOptional(entity);
+
+			//Set the IIntArray Information
+			entity.setHasRecipe(hasRecipe(match) ? 1 : 0);
+			entity.setRecipeTier(getRecipeTier(match));
+
+			//Get the modifier from the PISTON
+			if(entity.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_PISTON_SLOT).getItem() instanceof ATechComponentItem) {
+				entity.setModifier(
+						((ATechComponentItem) entity
+								.getItemStackHandler()
+								.getStackInSlot(ModValue.CRUSHER_PISTON_SLOT)
+								.getItem()).getComponentModifier());
+			}
+			//If stack is empty or something else modifier is 0
+			else {
+				entity.setModifier(0);
+			}
+
+			/*
+			 * ======= Set Max Progress =======
+			 */
+
+			if(entity.getMaxProgress() == 0
+				&& entity.getHasRecipe() == 1) {
+
+				entity.setMaxProgress(
+						(int) (getRecipeMaxProgress(match) * ((double)entity.getModifier()/100)));
+			}
+			else if (entity.getMaxProgress() != 0
+				&& entity.getHasRecipe() == 0) {
+
+				entity.setProgress(0);
+				entity.setMaxProgress(0);
+			}
+
+			/*
+			 * ======= Work =======
+			 */
+
+			if(entity.getHasRecipe() == 1) {
+				if(entity.getProgress() < entity.getMaxProgress()
+					&& entity.hasComponentsInSlots()) {
+
+					entity.incrementProgress();
+				}
+				if(entity.getProgress() >= entity.getMaxProgress()
+					&& entity.hasComponentsInSlots()) {
+
+					entity.setProgress(0);
+					entity.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_INPUT_SLOT).shrink(1);
+				}
+			}
+
+
+			//If the progress is NOT max AND it has a recipe AND it has a Piston AND Press Plate
+
+
+
+
 		}
 
 	}
@@ -140,8 +206,7 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 
 	//TODO Fix these so it calculates the inventory once instead of like 30 times
 
-	public static boolean hasRecipe(CrusherBlockEntity entity) {
-
+	public static Optional<CrusherRecipe> getOptional(CrusherBlockEntity entity) {
 		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
 		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
 			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
@@ -150,23 +215,19 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 		Optional<CrusherRecipe> match = entity.level.getRecipeManager()
 				.getRecipeFor(ModRecipeTypes.CrusherRecipeType.INSTANCE, inventory, entity.level);
 
+		return match;
+	}
+
+	public static boolean hasRecipe(Optional<CrusherRecipe> match) {
 		return match.isPresent();
 	}
 
-	public static int getRecipeTier(CrusherBlockEntity entity) {
-		SimpleContainer inventory = new SimpleContainer(entity.getItemStackHandler().getSlots());
-		for(int i = 0; i < entity.getItemStackHandler().getSlots(); i++)
-			inventory.setItem(i, entity.getItemStackHandler().getStackInSlot(i));
-
-		assert entity.level != null;
-		Optional<CrusherRecipe> match = entity.level.getRecipeManager()
-				.getRecipeFor(ModRecipeTypes.CrusherRecipeType.INSTANCE, inventory, entity.level);
-
+	public static int getRecipeTier(Optional<CrusherRecipe> match) {
 		return (match.isPresent() ? match.get().getTier() : 0);
 	}
 
-	public static int getRecipeMaxProgress(CrusherBlockEntity entity) {
-		return 0;
+	public static int getRecipeMaxProgress(Optional<CrusherRecipe> match) {
+		return (match.isPresent() ? match.get().getBaseProgress() : 0);
 	}
 
 	public void setHasRecipe(int flag) {
@@ -208,6 +269,10 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 				: 0;
 	}
 
+	public void incrementProgress() {
+		this.progress++;
+	}
+
 	public void setMaxProgress(int maxProgress) {
 		this.maxProgress = Math.max(0, maxProgress);
 	}
@@ -217,9 +282,28 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	}
 
 	public int getMaxProgress() {
-		return this.progress;
+		return this.maxProgress;
 	}
 
+	/*
+	 * ======= Check Component Slots =======
+	 */
 
+	public Item getPistonSlot() {
+		return this.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_PISTON_SLOT).getItem();
+	}
+	public Item getPressPlateSlot() {
+		return this.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_PRESS_PLATE_SLOT).getItem();
+	}
+
+	public boolean hasComponentsInSlots() {
+		if(this.getPistonSlot() instanceof ATechComponentItem
+			&& this.getPressPlateSlot() instanceof ATechComponentItem) {
+
+			return ((ATechComponentItem) this.getPistonSlot()).getFormFactor() == FormFactor.PISTON
+					&& ((ATechComponentItem) this.getPressPlateSlot()).getFormFactor() == FormFactor.PRESS_PLATE;
+		}
+		return false;
+	}
 
 }

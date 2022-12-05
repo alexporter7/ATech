@@ -3,7 +3,7 @@ package com.alexp777.atech.util;
 public enum ATechComponent {
 
 	BASIC_MOTOR(1, 5, ATechMaterial.COPPER, FormFactor.MOTOR),
-	BASIC_PISTON(1, 5, ATechMaterial.COPPER, FormFactor.PISTON),
+	BASIC_PISTON(1, 90, ATechMaterial.COPPER, FormFactor.PISTON),
 	IRON_PRESS_PLATE(2, 1, ATechMaterial.IRON, FormFactor.PRESS_PLATE);
 
 	/*
