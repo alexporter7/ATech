@@ -33,6 +33,7 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	private int modifier = 0;
 	private int progress = 0;
 	private int maxProgress = 0;
+	private WorkState workState = WorkState.OFF;
 
 	//These aren't saved in NBT since they're set in tick
 	private int hasRecipeFlag = 0;
@@ -112,18 +113,19 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 		if(!level.isClientSide()) {
 
 			/*
-			 * ======= Screen Setup =======
+			 * Trying to fail fast here
 			 */
+			if(!entity.hasComponentsInSlots())
+				entity.setWorkState(WorkState.OFF);
 
-			//Get Inventory Optional
-			Optional<CrusherRecipe> match = getOptional(entity);
+			//Check if there's parts in the slot since it's quick
+			//Set the machine to the "ready" state
+			if(entity.hasComponentsInSlots() && !entity.isWorking())
+				entity.setWorkState(WorkState.READY);
 
-			//Set the IIntArray Information
-			entity.setHasRecipe(hasRecipe(match) ? 1 : 0);
-			entity.setRecipeTier(getRecipeTier(match));
-
+			//Set up component screen info
 			//Get the modifier from the PISTON
-			if(entity.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_PISTON_SLOT).getItem() instanceof ATechComponentItem) {
+			if(entity.hasComponentsInSlots()) {
 				entity.setModifier(
 						((ATechComponentItem) entity
 								.getItemStackHandler()
@@ -136,44 +138,54 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 			}
 
 			/*
-			 * ======= Set Max Progress =======
+			 * ======= Work Logic =======
 			 */
 
-			if(entity.getMaxProgress() == 0
-				&& entity.getHasRecipe() == 1) {
-
-				entity.setMaxProgress(
-						(int) (getRecipeMaxProgress(match) * ((double)entity.getModifier()/100)));
-			}
-			else if (entity.getMaxProgress() != 0
-				&& entity.getHasRecipe() == 0) {
-
-				entity.setProgress(0);
-				entity.setMaxProgress(0);
+			//If the machine IS ready check for a recipe and set to working
+			if(entity.isReady() && hasRecipe(getOptional(entity))) {
+				entity.setWorkState(WorkState.WORKING);
 			}
 
-			/*
-			 * ======= Work =======
-			 */
+			if(entity.isWorking()) {
+				Optional<CrusherRecipe> match = getOptional(entity);
+				if(hasRecipe(match)) {
 
-			if(entity.getHasRecipe() == 1) {
-				if(entity.getProgress() < entity.getMaxProgress()
-					&& entity.hasComponentsInSlots()) {
+					/*
+					 * ======= Max Progress Setup =======
+					 */
+					if(entity.getMaxProgress() == 0)
+						entity.setMaxProgress((int) (getRecipeMaxProgress(match) * ((double)entity.getModifier()/100)));
 
-					entity.incrementProgress();
+					/*
+					 * ======= Screen Setup =======
+					 */
+
+					//Set the IIntArray Information
+					entity.setHasRecipe(hasRecipe(match) ? 1 : 0);
+					entity.setRecipeTier(getRecipeTier(match));
+
+					/*
+					 * ======= Work Logic =======
+					 */
+					if(entity.getProgress() < entity.getMaxProgress())
+						entity.incrementProgress();
+
+					if(entity.getProgress() >= entity.getMaxProgress()) {
+						entity.setWorkState(WorkState.READY);
+						entity.setProgress(0);
+						entity.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_INPUT_SLOT).shrink(1);
+						entity.getItemStackHandler().insertItem(
+								ModValue.CRUSHER_OUTPUT_SLOT, match.get().getResultItem().copy(), false);
+					}
 				}
-				if(entity.getProgress() >= entity.getMaxProgress()
-					&& entity.hasComponentsInSlots()) {
-
-					entity.setProgress(0);
-					entity.getItemStackHandler().getStackInSlot(ModValue.CRUSHER_INPUT_SLOT).shrink(1);
+				else {
+					entity.setWorkState(WorkState.READY);
 				}
+
 			}
 
-
-			//If the progress is NOT max AND it has a recipe AND it has a Piston AND Press Plate
-
-
+			if(entity.isOff() || entity.isReady())
+				entity.resetProgress();
 
 
 		}
@@ -230,6 +242,10 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 		return (match.isPresent() ? match.get().getBaseProgress() : 0);
 	}
 
+	/*
+	 * ======= Local Recipe =======
+	 */
+
 	public void setHasRecipe(int flag) {
 		this.hasRecipeFlag = flag;
 	}
@@ -285,6 +301,12 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 		return this.maxProgress;
 	}
 
+	public void resetProgress() {
+		this.progress = 0;
+		this.maxProgress = 0;
+		this.recipeTier = 0;
+	}
+
 	/*
 	 * ======= Check Component Slots =======
 	 */
@@ -304,6 +326,36 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 					&& ((ATechComponentItem) this.getPressPlateSlot()).getFormFactor() == FormFactor.PRESS_PLATE;
 		}
 		return false;
+	}
+
+	/*
+	 * ======= Work States =======
+	 */
+
+	public void setWorkState(WorkState workState) {
+		this.workState = workState;
+	}
+
+	public WorkState getWorkState() {
+		return this.workState;
+	}
+
+	public boolean isOff() {
+		return this.workState == WorkState.OFF;
+	}
+
+	public boolean isReady() {
+		return this.workState == WorkState.READY;
+	}
+
+	public boolean isWorking() {
+		return this.workState == WorkState.WORKING;
+	}
+
+	private enum WorkState {
+		OFF,
+		READY,
+		WORKING;
 	}
 
 }
