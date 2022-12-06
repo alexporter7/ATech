@@ -1,6 +1,7 @@
 package com.alexp777.atech.block;
 
 import com.alexp777.atech.ATech;
+import com.alexp777.atech.block.blocks.BasicGeneratorBlock;
 import com.alexp777.atech.block.blocks.Crusher;
 import com.alexp777.atech.block.blocks.ProjectTable;
 import com.alexp777.atech.block.blocks.SteelForge;
@@ -37,11 +38,13 @@ public class ModBlocks {
 					() -> new SteelForge(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
 					ModCreativeModeTab.ATECH_TAB);
 
-
 	public static final RegistryObject<Block> CRUSHER =
 			registerBlock("crusher",
 					() -> new Crusher(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
 					ModCreativeModeTab.ATECH_TAB);
+
+	public static final RegistryObject<Block> BASIC_GENERATOR =
+			registerBlock("basic_generator", BasicGeneratorBlock::new, ModCreativeModeTab.ATECH_TAB);
 
 	/**
 	 * Register a block
