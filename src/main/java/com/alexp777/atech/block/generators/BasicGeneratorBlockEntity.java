@@ -13,6 +13,8 @@ public class BasicGeneratorBlockEntity extends ATechGeneratorEntity {
 	 */
 
 	public static final int INVENTORY_SLOTS = 1;
+	public static final int BASE_GENERATION = 200;
+	public static final int BASE_EXTRACTION = 500;
 
 
 	/*
@@ -37,6 +39,9 @@ public class BasicGeneratorBlockEntity extends ATechGeneratorEntity {
 	 */
 	public BasicGeneratorBlockEntity(BlockPos pPos, BlockState pBlockState, int slots) {
 		super(ModBlockEntities.CRUSHER_BLOCK_ENTITY.get(), pPos, pBlockState, slots);
+		//Set base generation and extraction speeds
+		this.baseGeneration = BASE_GENERATION;
+		this.baseExtraction = BASE_EXTRACTION;
 	}
 
 
