@@ -1,9 +1,14 @@
 ad1430a238f2fa7fbf3cd78fde1b830d07f2fa10 assets/atech/models/item/basic_motor.json
 dab52e4d9973ca03f33e36a539fdd19406287eb9 assets/atech/models/item/basic_piston.json
+d6b7b61cded481865aeba4bdc24e7e8542063e22 assets/atech/models/item/copper_dust.json
 095c156674e9babe28f9b5f98a175e312afd4e85 assets/atech/models/item/copper_ingot.json
+6b2738c64461f97c0c5eb1cafe68ca1e5234b8f5 assets/atech/models/item/iron_dust.json
+e34b52aa3751bab83cf9e59286c5c5af9fbfc13a assets/atech/models/item/lead_dust.json
 d307cbe429715a880e67dadcbce882a4a029af89 assets/atech/models/item/lead_ingot.json
+c56ba27a1b4bf01b74da48b541dc3677eac1672a assets/atech/models/item/nickel_dust.json
 1f6427cd1fa0fbc2acbfc04c5a9843b5701df474 assets/atech/models/item/nickel_ingot.json
 ee961b5f8ef080367f4955ba9d7be3a0b4e1efca assets/atech/models/item/steel_ingot.json
+6a0db1438b1ad4c7fccf131a41239ac728f06ca2 assets/atech/models/item/tin_dust.json
 df38d01a677e9439436fde9cd2c8a3c0e3f2675a assets/atech/models/item/tin_ingot.json
 f23d10dccb94d200a6d97022ce2cb2036ccd8cda data/atech/advancements/recipes/atech_tab/copper_dust.json
 c409f1ebb7d46567425a622e3ef5a3584bf482c8 data/atech/advancements/recipes/atech_tab/iron_dust.json

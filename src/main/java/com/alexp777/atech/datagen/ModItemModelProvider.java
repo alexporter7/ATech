@@ -26,6 +26,12 @@ public class ModItemModelProvider extends ItemModelProvider {
 		simpleItem(ModItems.NICKEL_INGOT.get());
 		simpleItem(ModItems.LEAD_INGOT.get());
 
+		simpleItem(ModItems.IRON_DUST.get());
+		simpleItem(ModItems.COPPER_DUST.get());
+		simpleItem(ModItems.TIN_DUST.get());
+		simpleItem(ModItems.LEAD_DUST.get());
+		simpleItem(ModItems.NICKEL_DUST.get());
+
 		/*
 		======= Alloys =======
 		 */

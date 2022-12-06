@@ -304,7 +304,6 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 	public void resetProgress() {
 		this.progress = 0;
 		this.maxProgress = 0;
-		this.recipeTier = 0;
 	}
 
 	/*

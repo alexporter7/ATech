@@ -80,6 +80,8 @@ public class ModItems {
 	//Pistons
 	public static final RegistryObject<Item> BASIC_PISTON = ITEMS.register("basic_piston",
 			() -> new ATechComponentItem(ATechComponent.BASIC_PISTON));
+	public static final RegistryObject<Item> MAGIC_PISTON = ITEMS.register("magic_piston",
+			() -> new ATechComponentItem(ATechComponent.MAGIC_PISTON));
 
 	/*
 	======= Engine Parts =======
