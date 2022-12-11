@@ -101,15 +101,7 @@ public class CrusherBlockEntity extends ATechMachineEntity implements MenuProvid
 
 	public static void tick(Level level, BlockPos pos, BlockState state, CrusherBlockEntity entity) {
 
-		//Check if Server Side
-		//Check if Piston and Press Plate is present
-			//If Press Plate IS present check for recipe
-				//If Press Plate AND recipe present and not at max progress start work
-					//Random chance Press Plate damage
-					//Work
-				//If Press Plate and recipe present but at max progress
-					//put output item
-					//decrement input item
+
 		if(!level.isClientSide()) {
 
 			/*
